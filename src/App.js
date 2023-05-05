@@ -5,45 +5,24 @@ import Reset from "./component/bimForm/reset-password";
 import NoPage from "./component/Nopage";
 import { AuthMail } from "./contexts/authMail";
 import VerifyEmail from "./component/verifyEmail";
-import ProgressForm from "./component/bimForm/progressForm";
-
 import { AuthProvider } from "./contexts/userAuth";
-import Public from "./pages";
-import DealOfDay from "./component/deal";
-import SimilarProducts from "./component/similarProducts";
-import ProductDetails from "./component/productDetails";
-import Filter from "./component/filter";
-import Products from "./component/products";
-import Wishlist from "./component/wishlist";
-import Banner from "./component/bannerCarousel";
-import Orderdetails from "./component/orderDetails";
-import Servicewrapper from "./component/serviceWrapper";
-import Coupons from "./component/coupons";
-import Navbar from "./component/navBar";
-import Pastorder from "./component/pastOrder";
-
-function Container() {
-  return (
-    <section>
-      <Pastorder />
-      <div className="divider"></div>
-      <Coupons />
-      <div className="divider"></div>
-      <Orderdetails />
-      <div className="divider"></div>
-      <Servicewrapper />
-      <Navbar />
-    </section>
-  );
-}
+import Search from "./pages/search";
+import Home from "./pages/home";
+import Notifications from "./pages/notifications";
+import WishList from "./pages/wishlist";
+import Cart from "./pages/cart";
 
 function App() {
   return (
     <AuthProvider>
       <Routes>
         {/* public routes */}
-        <Route path="/" element={<Container />} />
-        <Route path="/progress" element={<ProgressForm />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/wishlist" element={<WishList />} />
+        <Route path="/cart" element={<Cart />} />
+        {/* <Route path="/progress" element={<ProgressForm />} /> */}
 
         <Route path="/reset-password" element={<Reset />} />
 

@@ -1,7 +1,6 @@
 import React from "react";
 import img from "../assets/images/home-slider/1.jpg";
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -28,14 +27,13 @@ const Banner = () => {
   const sliderSettings = {
     slidesToShow: 1,
     slidesToScroll: 1,
-    infinite: true,
-    dots: true,
-    prevArrow: false,
-    nextArrow: false,
+    infinite: false,
+    rtl: false,
+    autoplay: true,
   };
 
   return (
-    <section className="pt-0 home-section ratio_55">
+    <section className="pt-5 home-section ratio_55">
       <Slider className="pl-15" {...sliderSettings}>
         {cData.map((item, index) => {
           return (

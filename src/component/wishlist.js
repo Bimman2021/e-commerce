@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import img from "../assets/images/products/1.jpg";
-
-import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 function OffCanvasExample({ name }) {

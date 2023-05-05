@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const SimilarProducts = () => {
+const SimilarProducts = ({ title }) => {
   const [sliderRef, setSliderRef] = useState(null);
 
   const cData = [
@@ -66,27 +66,13 @@ const SimilarProducts = () => {
       },
     ],
   };
-  // const sliderSettings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 3,
-  //   slidesToScroll: 3,
-  // };
 
   return (
     <section className="pt-0 product-slider-section overflow-hidden">
       <div className="title-section px-15">
-        <h2>Similar Products</h2>
+        <h2>{title}</h2>
       </div>
       <div className="">
-        <button className="btn" onClick={sliderRef?.slickPrev}>
-          <i className="iconly-Arrow-Left-Circle fs-1"></i>
-        </button>
-        <button className="btn" onClick={sliderRef?.slickNext}>
-          <i className="iconly-Arrow-Right-Circle fs-3"></i>
-        </button>
-
         <Slider
           ref={setSliderRef}
           className="pl-15 d-chevron"
@@ -97,9 +83,9 @@ const SimilarProducts = () => {
               <div className="product-box ratio_square" key={index}>
                 <div
                   className=""
-                  style={{
-                    margin: "0 8px",
-                  }}
+                  // style={{
+                  //   margin: "0 0px",
+                  // }}
                 >
                   <div className="img-part">
                     <a

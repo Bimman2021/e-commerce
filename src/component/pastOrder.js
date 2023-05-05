@@ -1,5 +1,6 @@
 import React from "react";
 import img from "../assets/images/products/3.jpg";
+import { Link } from "react-router-dom";
 
 const Pastorder = () => {
   return (
@@ -13,9 +14,9 @@ const Pastorder = () => {
               <div className="media-body">
                 <h4>Pink Hoodie t-shirt full </h4>
                 <h5 className="content-color my-1">Size: S, Qty: 1</h5>
-                <a className="theme-color" href="#">
+                <Link className="theme-color" to="">
                   View Details
-                </a>
+                </Link>
               </div>
               <span className="status-label bg-theme text-white">
                 delivered
@@ -36,7 +37,7 @@ const Pastorder = () => {
           </div>
           <div className="rate-section">
             <ul>
-              <li data-bs-toggle="offcanvas" data-bs-target="#offcanvasreview">
+              <li>
                 <i className="iconly-Star icli"></i> Rate &amp; Review Product
               </li>
               <li>
