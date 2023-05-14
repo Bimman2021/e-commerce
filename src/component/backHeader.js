@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const BackHeader = ({ title }) => {
+const BackHeader = ({ title, subTitle }) => {
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -16,6 +16,7 @@ const BackHeader = ({ title }) => {
           <i className="iconly-Arrow-Left icli"></i>
           <div className="content">
             <h2>{title}</h2>
+            {subTitle && <h6>{subTitle}</h6>}
           </div>
         </Link>
       </div>

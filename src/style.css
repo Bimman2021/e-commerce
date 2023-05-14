@@ -1340,14 +1340,14 @@ button:focus {
   margin-top: 4px;
   display: block;
 }
-.bottom-panel ul li.active a span {
+.bottom-panel ul li a .active span {
   color: #ff4c3b;
 }
-.bottom-panel ul li.active a i.icbo {
+.bottom-panel ul li a .active i.icbo {
   display: block;
   color: #ff4c3b;
 }
-.bottom-panel ul li.active a i.icli {
+.bottom-panel ul li a .active i.icli {
   display: none;
 }
 

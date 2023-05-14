@@ -10,7 +10,7 @@ import CartBottom from "../component/cartBottom";
 const Cart = () => {
   return (
     <div className="top-space">
-      <BackHeader title="Shopping Cart" />
+      <BackHeader title="Shopping Cart" subTitle="step 1 of 3" />
       <SingleCartItem />
       <div className="divider"></div>
       <SimilarProducts title="You May Also Like" />
@@ -21,7 +21,7 @@ const Cart = () => {
       <div className="divider"></div>
       <Servicewrapper />
       <div className="panel-space"></div>
-      <CartBottom />
+      <CartBottom rightTitle="Place Order" />
     </div>
   );
 };

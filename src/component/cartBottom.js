@@ -1,19 +1,36 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const CartBottom = () => {
+const CartBottom = ({
+  subLeftTitle,
+  leftTitle,
+  rightTitle,
+  handleLeft,
+  handleRight,
+}) => {
   return (
     <div>
       <div className="cart-bottom">
         <div>
           <div className="left-content">
-            <h4>$270.00</h4>
-            <a href="#order-details" className="theme-color">
-              View details
-            </a>
+            {subLeftTitle ? (
+              <div>
+                <h4>{subLeftTitle}</h4>
+                <Link to="" onClick={handleLeft} className="theme-color">
+                  {leftTitle}
+                </Link>
+              </div>
+            ) : (
+              <div className="left-content col-5">
+                <a href="#" className="title-color">
+                  {leftTitle}
+                </a>
+              </div>
+            )}
           </div>
-          <a href="delivery.html" className="btn btn-solid">
-            Place Order
-          </a>
+          <button onClick={handleRight} className="btn btn-solid">
+            {rightTitle}
+          </button>
         </div>
       </div>
     </div>

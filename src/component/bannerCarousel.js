@@ -33,7 +33,7 @@ const Banner = () => {
   };
 
   return (
-    <section className="pt-5 home-section ratio_55">
+    <section className="top-space home-section ratio_55">
       <Slider className="pl-15" {...sliderSettings}>
         {cData.map((item, index) => {
           return (

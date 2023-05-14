@@ -30,13 +30,13 @@ function QtyMenu() {
 const SingleCartItem = () => {
   return (
     <div className="cart-box px-15">
-      <Link href="product.html" className="cart-img">
+      <Link to="product.html" className="cart-img">
         <img src={img} className="img-fluid" alt="" />
       </Link>
       <div className="cart-content">
-        <Link href="product.html">
-          <h4>Pink Hoodie t-shirt full </h4>
-        </Link>
+        {/* <Link to="product.html"> */}
+        <h4>Pink Hoodie t-shirt full </h4>
+        {/* </Link> */}
         <h5 className="content-color">by Mango</h5>
         <div className="price">
           <h4>

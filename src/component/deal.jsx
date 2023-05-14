@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const DealOfDay = ({ props }) => {
-  console.log(props.data);
   const handleLike = (e) => {
     // check if the item is already in storage wish list
     // store in cookies || remove from cookie
