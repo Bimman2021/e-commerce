@@ -1,32 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import shareImg from "../assets/svg/share-2.svg";
+import { RWebShare } from "react-web-share";
 
 const Header = () => {
   return (
-    <header class="">
-      <div class="back-links">
+    <header className="">
+      <div className="back-links">
         <Link to="shop.html">
-          <i class="iconly-Arrow-Left icli"></i>
-          <div class="content">
+          <i className="iconly-Arrow-Left icli"></i>
+          <div className="content">
             <h2>Floral Skirts </h2>
           </div>
         </Link>
       </div>
-      <div class="header-option">
+      <div className="header-option">
         <ul>
           <li>
-            <Link to="">
-              <img src="assets/svg/share-2.svg" class="img-fluid" alt="" />
-            </Link>
+            <RWebShare
+              data={{
+                text: "Like humans, flamingos make friends for life",
+                url: "https://on.natgeo.com/2zHaNup",
+                title: "Flamingos",
+              }}
+            >
+              <img src={shareImg} className="img-fluid" alt="" />
+            </RWebShare>
           </li>
           <li>
             <Link to="wishlist.html">
-              <i class="iconly-Heart icli"></i>
+              <i className="iconly-Heart icli"></i>
             </Link>
           </li>
           <li>
             <Link to="cart.html">
-              <i class="iconly-Buy icli"></i>
+              <i className="iconly-Buy icli"></i>
             </Link>
           </li>
         </ul>
