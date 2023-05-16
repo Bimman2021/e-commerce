@@ -13,6 +13,8 @@ import WishList from "./pages/wishlist";
 import Cart from "./pages/cart";
 import Profile from "./pages/profile";
 import ProfileSetting from "./pages/profileSettings";
+import Shop from "./pages/shop";
+import Product from "./pages/product";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/profile-settings" element={<ProfileSetting />} />
+      <Route path="/shop" element={<Shop />} />
+      <Route path="/product" element={<Product />} />
       {/* <Route path="/progress" element={<ProgressForm />} /> */}
 
       <Route path="/reset-password" element={<Reset />} />

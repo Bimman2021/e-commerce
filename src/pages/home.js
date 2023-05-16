@@ -5,6 +5,8 @@ import Banner from "../component/bannerCarousel";
 import DealOfDay from "../component/deal";
 import axios from "../config/axios";
 import Navbar from "../component/navBar";
+import SectionCategories from "../component/sectionCategories";
+import FindYourStyle from "../component/findYourStyle";
 
 // import axios from "axios";
 
@@ -25,6 +27,8 @@ const Home = () => {
   return (
     <>
       <Header />
+      <SectionCategories />
+      <div className="divider"></div>
       <Banner />
       {data ? (
         <DealOfDay props={{ data }} />
@@ -33,6 +37,10 @@ const Home = () => {
           <Spinner animation="grow" />
         </div>
       )}
+
+      <div className="divider"></div>
+      <FindYourStyle />
+      <div className="divider"></div>
       <Navbar />
     </>
   );

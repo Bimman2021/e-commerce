@@ -1,47 +1,41 @@
 import React from "react";
 import img from "../assets/images/home-slider/1.jpg";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Banner = () => {
   const cData = [
     {
-      pName: "Blue Denin Jacket",
-      pDiscount: "10%",
-      delPrice: "30",
-      pPrice: "20",
-      inWishList: false,
-      pRating: "3",
+      url: require("../assets/images/home-slider/1.jpg"),
     },
     {
-      pName: "Male Jacket",
-      pDiscount: "22%",
-      delPrice: "32",
-      pPrice: "70",
-      inWishList: false,
-      pRating: "4",
+      url: require("../assets/images/home-slider/2.jpg"),
+    },
+    {
+      url: require("../assets/images/home-slider/2.jpg"),
     },
   ];
 
   const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    infinite: false,
-    rtl: false,
-    autoplay: true,
   };
 
   return (
-    <section className="top-space home-section ratio_55">
-      <Slider className="pl-15" {...sliderSettings}>
+    <div className="overflow-hidden mb-5">
+      <Slider className="ratio_55" {...sliderSettings}>
         {cData.map((item, index) => {
           return (
             <div key={index}>
               <div
                 className="slider-box bg-size"
                 style={{
-                  backgroundImage: `url(${img})`,
+                  backgroundImage: `url(${item.url})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center center",
                   display: "block",
@@ -52,9 +46,9 @@ const Banner = () => {
                     <h2>Welcome To Multikart</h2>
                     <h1>Flat 50% OFF</h1>
                     <h6>Free Shipping Till Mid Night</h6>
-                    <a href="shop.html" className="btn btn-solid">
+                    <Link to="shop" className="btn btn-solid">
                       SHOP NOW
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -62,7 +56,7 @@ const Banner = () => {
           );
         })}
       </Slider>
-    </section>
+    </div>
   );
 };
 

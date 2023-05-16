@@ -1,6 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Findyours = () => {
+const FindYourStlye = () => {
+  const pData = [
+    { url: require("../assets/images/products/1.jpg") },
+    { url: require("../assets/images/products/2.jpg") },
+    { url: require("../assets/images/products/3.jpg") },
+    { url: require("../assets/images/products/4.jpg") },
+  ];
+
   return (
     <section className="pt-0 tab-section">
       <div className="title-section px-15">
@@ -10,560 +18,84 @@ const Findyours = () => {
       <div className="tab-section">
         <ul className="nav nav-tabs theme-tab pl-15">
           <li className="nav-item">
-            <button
-              className="nav-link"
-              data-bs-toggle="tab"
-              data-bs-target="#trending"
-              type="button"
-            >
-              Trending Now
-            </button>
+            <button className="nav-link active">Trending Now</button>
           </li>
           <li className="nav-item">
-            <button
-              className="nav-link active"
-              data-bs-toggle="tab"
-              data-bs-target="#top"
-              type="button"
-            >
-              Top Picks
-            </button>
+            <button className="nav-link">Top Picks</button>
           </li>
           <li className="nav-item">
-            <button
-              className="nav-link"
-              data-bs-toggle="tab"
-              data-bs-target="#featured"
-              type="button"
-            >
-              Featured Products
-            </button>
+            <button className="nav-link">Featured Products</button>
           </li>
         </ul>
         <div className="tab-content px-15">
-          <div className="tab-pane fade" id="trending">
+          <div className="tab-pane fade active show" id="trending">
             <div className="row gy-3 gx-3">
-              <div className="col-md-4 col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/4.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/4.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
+              {pData.map((item, index) => {
+                return (
+                  <div key={index} className="col-md-4 col-md-4 col-6">
+                    <div className="product-box ratio_square">
+                      <div className="img-part">
+                        <Link
+                          to="product"
+                          className="bg-size"
+                          style={{
+                            backgroundImage: `url(${item.url})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center center",
+                            display: "block",
+                          }}
+                        >
+                          {/* <img
+                            src={item.url}
+                            alt=""
+                            className="img-fluid bg-img"
+                            // style="display: none;"
+                          /> */}
+                        </Link>
+                        <div className="wishlist-btn">
+                          <i className="iconly-Heart icli"></i>
+                          <i className="iconly-Heart icbo"></i>
+                          <div className="effect-group">
+                            <span className="effect"></span>
+                            <span className="effect"></span>
+                            <span className="effect"></span>
+                            <span className="effect"></span>
+                            <span className="effect"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="product-content">
+                        <ul className="ratings">
+                          <li>
+                            <i className="iconly-Star icbo"></i>
+                          </li>
+                          <li>
+                            <i className="iconly-Star icbo"></i>
+                          </li>
+                          <li>
+                            <i className="iconly-Star icbo"></i>
+                          </li>
+                          <li>
+                            <i className="iconly-Star icbo"></i>
+                          </li>
+                          <li>
+                            <i className="iconly-Star icbo empty"></i>
+                          </li>
+                        </ul>
+                        <Link to="product.html">
+                          <h4>Blue Denim Jacket</h4>
+                        </Link>
+                        <div className="price">
+                          <h4>
+                            $32.00 <del>$35.00</del>
+                            <span>20%</span>
+                          </h4>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="tab-pane fade active show" id="top">
-            <div className="row gy-3 gx-3">
-              <div className="col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/6.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/6.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/7.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/7.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/4.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/4.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/5.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/5.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="tab-pane fade" id="featured">
-            <div className="row gy-3 gx-3">
-              <div className="col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/7.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/7.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/4.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/4.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/5.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/5.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="product-box ratio_square">
-                  <div className="img-part">
-                    <a
-                      href="product.html"
-                      className="bg-size"
-                      style='background-image: url("assets/images/products/6.jpg"); background-size: cover; background-position: center center; display: block;'
-                    >
-                      <img
-                        src="assets/images/products/6.jpg"
-                        alt=""
-                        className="img-fluid bg-img"
-                        style="display: none;"
-                      />
-                    </a>
-                    <div className="wishlist-btn">
-                      <i className="iconly-Heart icli"></i>
-                      <i className="iconly-Heart icbo"></i>
-                      <div className="effect-group">
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                        <span className="effect"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <ul className="ratings">
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo"></i>
-                      </li>
-                      <li>
-                        <i className="iconly-Star icbo empty"></i>
-                      </li>
-                    </ul>
-                    <a href="product.html">
-                      <h4>Blue Denim Jacket</h4>
-                    </a>
-                    <div className="price">
-                      <h4>
-                        $32.00 <del>$35.00</del>
-                        <span>20%</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -572,4 +104,4 @@ const Findyours = () => {
   );
 };
 
-export default Findyours;
+export default FindYourStlye;

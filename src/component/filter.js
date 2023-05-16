@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "../pricingSlider.css";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 
-function Filter() {
-  const [show, setShow] = useState(false);
+function Filter({ props }) {
   const [slidePrice, setSlidePrice] = useState([3, 40]);
 
   const handleSliderInput = (elem) => {
@@ -16,15 +14,15 @@ function Filter() {
 
   return (
     <>
-      <Button className="me-2 mb-2" onClick={() => setShow(true)}>
-        Full screen
-      </Button>
+      <button className="filter-btn border-0" onClick={props.handleFilter}>
+        <i className="iconly-Filter icli"></i>
+      </button>
 
       <Modal
         className="filter-modal"
-        show={show}
+        show={props.openFilter}
         fullscreen={true}
-        onHide={() => setShow(false)}
+        onHide={() => props.setOpenFilter(false)}
       >
         <Modal.Header closeButton>
           <h2>Filter</h2>
@@ -241,10 +239,16 @@ function Filter() {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <button className="reset-link bg-none" onClick={() => setShow(false)}>
+          <button
+            className="reset-link bg-none"
+            onClick={() => props.setOpenFilter(false)}
+          >
             RESET
           </button>
-          <button className="btn btn-solid" onClick={() => setShow(false)}>
+          <button
+            className="btn btn-solid"
+            onClick={() => props.setOpenFilter(false)}
+          >
             apply filters
           </button>
         </Modal.Footer>

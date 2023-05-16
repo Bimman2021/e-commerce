@@ -940,7 +940,7 @@ button:focus {
 }
 
 .ratio_55 .bg-size:before {
-  padding-top: 55%;
+  padding-top: 60%;
   content: "";
   display: block;
 }
@@ -1063,9 +1063,9 @@ button:focus {
   transition: all 0.5s ease;
 }
 
-.theme-dots.slick-dotted.slick-slider {
+/* .theme-dots.slick-dotted.slick-slider {
   margin-bottom: 0;
-}
+} */
 
 /**=====================
   2.11 Switch css start
@@ -1809,12 +1809,12 @@ header.darkHeader.bg-transparent {
   margin-left: 5px;
 }
 
-[dir="rtl"] .slick-slider .ratings {
+/* [dir="rtl"] .slick-slider .ratings {
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
   padding-right: 0;
-}
+} */
 
 .ratings {
   display: -webkit-box;
@@ -2743,7 +2743,7 @@ header.darkHeader.bg-transparent {
 }
 
 .home-section {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .home-section .slick-default .slick-list {
   margin-left: -23px;
@@ -2753,7 +2753,7 @@ header.darkHeader.bg-transparent {
   overflow: hidden;
   position: relative;
 }
-.home-section .slider-box .slider-content {
+.slider-box .slider-content {
   padding: 18px;
   position: absolute;
   top: 50%;
@@ -2762,19 +2762,19 @@ header.darkHeader.bg-transparent {
   left: 0;
   text-align: left;
 }
-.home-section .slider-box .slider-content h1 {
+.slider-box .slider-content h1 {
   color: #ff4c3b;
   font-weight: 700;
   margin: 6px 0;
 }
-.home-section .slider-box .slider-content h2 {
+.slider-box .slider-content h2 {
   margin-top: -4px;
 }
-.home-section .slider-box .slider-content h6 {
+.slider-box .slider-content h6 {
   color: #222222;
   margin-bottom: 8px;
 }
-[class="dark"] .home-section .slider-box .slider-content h6 {
+[class="dark"] .slider-box .slider-content h6 {
   color: #777777;
 }
 
@@ -4353,7 +4353,7 @@ header.darkHeader.bg-transparent {
 /*=====================
   5.1 RTL CSS start
 ==========================*/
-[dir="rtl"] .slick-slider {
+/* [dir="rtl"] .slick-slider {
   direction: ltr;
 }
 
@@ -4364,7 +4364,7 @@ header.darkHeader.bg-transparent {
 [dir="rtl"] .form-floating > label {
   left: unset;
   right: 16px;
-}
+} */
 
 /* ====================
   my custom styles
@@ -4461,3 +4461,12 @@ header.darkHeader.bg-transparent {
   margin-left: -23px;
   padding: 0px 30px;
 }
+
+.slick-prev:before,
+.slick-next:before {
+  color: red !important;
+}
+
+/* .slick-slider {
+  max-width: 95vw !important;
+} */
