@@ -27,6 +27,7 @@ const Home = () => {
   return (
     <>
       <Header />
+      <div className="divider"></div>
       <SectionCategories />
       <div className="divider"></div>
       <Banner />

@@ -15,8 +15,16 @@ import Profile from "./pages/profile";
 import ProfileSetting from "./pages/profileSettings";
 import Shop from "./pages/shop";
 import Product from "./pages/product";
+import { useSelector } from "react-redux";
+import Delivery from "./pages/delivery";
+import Payment from "./pages/payment";
+import OrderPlaced from "./pages/orderPlaced";
+import OrderTrack from "./pages/orderTrack";
+import AddAddress from "./pages/AddAddress";
 
 function App() {
+  const dayNight = useSelector((state) => state.dayNight);
+
   return (
     <Routes>
       {/* public routes */}
@@ -27,8 +35,13 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/profile-settings" element={<ProfileSetting />} />
+      <Route path="/delivery" element={<Delivery />} />
       <Route path="/shop" element={<Shop />} />
+      <Route path="/payment" element={<Payment />} />
       <Route path="/product" element={<Product />} />
+      <Route path="/order-placed" element={<OrderPlaced />} />
+      <Route path="/track-order" element={<OrderTrack />} />
+      <Route path="/new-address" element={<AddAddress />} />
       {/* <Route path="/progress" element={<ProgressForm />} /> */}
 
       <Route path="/reset-password" element={<Reset />} />

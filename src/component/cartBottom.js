@@ -5,26 +5,27 @@ const CartBottom = ({
   subLeftTitle,
   leftTitle,
   rightTitle,
-  handleLeft,
+  LeftLink,
   handleRight,
+  className,
 }) => {
   return (
     <div>
-      <div className="cart-bottom">
+      <div className={`${className} cart-bottom`}>
         <div>
           <div className="left-content">
             {subLeftTitle ? (
               <div>
                 <h4>{subLeftTitle}</h4>
-                <Link to="" onClick={handleLeft} className="theme-color">
+                <Link to={LeftLink} className="theme-color">
                   {leftTitle}
                 </Link>
               </div>
             ) : (
               <div className="left-content col-5">
-                <a href="#" className="title-color">
+                <Link to={LeftLink} className="title-color">
                   {leftTitle}
-                </a>
+                </Link>
               </div>
             )}
           </div>

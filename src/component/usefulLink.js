@@ -1,8 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import img from "../assets/images/flag.png";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { toggleMode } from "../contexts/slices/dayNight";
+import { getCookie, setCookie } from "../config/useCookie";
 
 const UsefulLink = () => {
+  const setTrue = String(getCookie("dayNight")).toLowerCase() === "true";
+  // const dayNight = useSelector((state) => state.dayNight);
+  const dispatch = useDispatch();
+
+  const handleDark = async (e) => {
+    const isDark = e.target.checked;
+    dispatch(toggleMode(isDark));
+
+    setCookie("dayNight", isDark, 3);
+    window.location.reload();
+  };
+
   return (
     <>
       <div className="sidebar-content">
@@ -15,7 +31,13 @@ const UsefulLink = () => {
                   <h4>Dark Mode</h4>
                 </div>
                 <div className="button toggle-btn ms-auto">
-                  <input id="darkButton" type="checkbox" className="checkbox" />
+                  <input
+                    onChange={handleDark}
+                    value={setTrue}
+                    checked={setTrue}
+                    type="checkbox"
+                    className="checkbox"
+                  />
                   <div className="knobs">
                     <span></span>
                   </div>
@@ -24,23 +46,7 @@ const UsefulLink = () => {
               </div>
             </div>
           </li>
-          <li>
-            <div>
-              <i className="iconly-Setting icli"></i>
-              <div className="content toggle-sec w-100">
-                <div>
-                  <h4>RTL</h4>
-                </div>
-                <div className="button toggle-btn ms-auto">
-                  <input id="rtlButton" type="checkbox" className="checkbox" />
-                  <div className="knobs">
-                    <span></span>
-                  </div>
-                  <div className="layer"></div>
-                </div>
-              </div>
-            </div>
-          </li>
+
           <li>
             <Link to="pages.html">
               <i className="iconly-Paper icli"></i>

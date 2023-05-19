@@ -6,9 +6,16 @@ import Coupons from "../component/coupons";
 import Orderdetails from "../component/orderDetails";
 import Servicewrapper from "../component/serviceWrapper";
 import CartBottom from "../component/cartBottom";
+import EmptyCart from "../component/emptyCart";
 
 const Cart = () => {
-  return (
+  const isEmpty = true;
+  return isEmpty ? (
+    <>
+      <BackHeader title="Shopping Cart" />
+      <EmptyCart />
+    </>
+  ) : (
     <div className="top-space">
       <BackHeader title="Shopping Cart" subTitle="step 1 of 3" />
       <SingleCartItem />

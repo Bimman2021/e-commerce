@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import shareImg from "../assets/svg/share-2.svg";
 import { RWebShare } from "react-web-share";
+import ProductDetails from "../component/productDetails";
+import Products from "../component/products";
 
 const Header = () => {
   return (
@@ -20,7 +22,7 @@ const Header = () => {
             <RWebShare
               data={{
                 text: "Like humans, flamingos make friends for life",
-                url: "https://on.natgeo.com/2zHaNup",
+                url: "https://olo.com/2zHaNup",
                 title: "Flamingos",
               }}
             >
@@ -28,12 +30,12 @@ const Header = () => {
             </RWebShare>
           </li>
           <li>
-            <Link to="wishlist.html">
+            <Link to="/wishlist">
               <i className="iconly-Heart icli"></i>
             </Link>
           </li>
           <li>
-            <Link to="cart.html">
+            <Link to="/cart">
               <i className="iconly-Buy icli"></i>
             </Link>
           </li>
@@ -43,11 +45,33 @@ const Header = () => {
   );
 };
 
+const Footer = () => {
+  return (
+    <div className="fixed-panel">
+      <div className="row">
+        <div className="col-6">
+          <Link to="/wishlist">
+            <i className="iconly-Heart icli"></i>WISHLIST
+          </Link>
+        </div>
+        <div className="col-6">
+          <button className="theme-color">
+            <i className="iconly-Buy icli"></i>ADD TO BAG
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Product = () => {
   return (
     <div>
-      Product
       <Header />
+      <div className="divider"></div>
+      <ProductDetails />
+
+      <Footer />
     </div>
   );
 };

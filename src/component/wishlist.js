@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import img from "../assets/images/products/1.jpg";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../contexts/slices/cartSlice";
+import { setCookie } from "../config/useCookie";
 
 function OffCanvasExample({ name }) {
   const [show, setShow] = useState(false);
@@ -25,25 +28,25 @@ function OffCanvasExample({ name }) {
         }}
       >
         <Offcanvas.Body>
-          <div class="content">
+          <div className="content">
             <h4>Remove Item:</h4>
             <p>
               Are you sure you want to remove or move this item from the cart?
             </p>
           </div>
-          <div class="bottom-cart-panel">
-            <div class="row">
-              <div class="col-7">
+          <div className="bottom-cart-panel">
+            <div className="row">
+              <div className="col-7">
                 <button
-                  class="title-color btn-none"
+                  className=" btn-none d-inline"
                   onClick={() => setShow(false)}
                 >
                   MOVE TO WISHLIST
                 </button>
               </div>
-              <div class="col-5">
+              <div className="col-5">
                 <button
-                  class="theme-color btn-none"
+                  className="theme-color btn-none"
                   onClick={() => setShow(false)}
                 >
                   REMOVE
@@ -58,6 +61,15 @@ function OffCanvasExample({ name }) {
 }
 
 const Wishlist = () => {
+  setCookie("wishlist", "hello world", 2);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => {
+    return state.cartItems;
+  });
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(20));
+  };
   return (
     <section className="cart-section pt-0 top-space section-b-space">
       <div className="cart-box px-15">
@@ -76,7 +88,7 @@ const Wishlist = () => {
             </h4>
           </div>
           <div className="cart-option">
-            <h5 data-bs-toggle="offcanvas" data-bs-target="#removecart">
+            <h5 onClick={handleAddToCart} style={{ cursor: "pointer" }}>
               <i className="iconly-Buy icli"></i> Add to Cart
             </h5>
             <span className="divider-cls">|</span>
