@@ -13,6 +13,7 @@ const DealOfDay = ({ props }) => {
       e.currentTarget.className = "wishlist-btn";
     }
   };
+
   return (
     <section className="deals-section px-15 pt-0">
       <div className="title-part">

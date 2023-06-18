@@ -7,7 +7,8 @@ import store from "./contexts/store";
 import { Provider } from "react-redux";
 import { CookiesProvider } from "react-cookie";
 import { getCookie } from "./config/useCookie";
-
+import "./bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 // async importing style
 
 const night = getCookie("dayNight");

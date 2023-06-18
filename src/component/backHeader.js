@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const BackHeader = ({ title, subTitle, style }) => {
+const BackHeader = ({ title, subTitle, style, options }) => {
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -20,6 +20,22 @@ const BackHeader = ({ title, subTitle, style }) => {
           </div>
         </Link>
       </div>
+      {options && (
+        <div className="header-option">
+          <ul>
+            <li>
+              <Link to="/wishlist">
+                <i className="iconly-Heart icli"></i>
+              </Link>
+            </li>
+            <li>
+              <Link to="/cart">
+                <i className="iconly-Buy icli"></i>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </header>
   );
 };

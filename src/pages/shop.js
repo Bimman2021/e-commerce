@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Filter from "../component/filter";
+import Navbar from "../component/navBar";
 
 const Header = () => {
   return (
@@ -50,6 +51,7 @@ const Shop = () => {
   return (
     <div>
       <Header />
+      <Navbar />
       <div className="search-panel top-space xl-space px-15">
         <div className="search-bar">
           <input
@@ -134,6 +136,7 @@ const Shop = () => {
           })}
         </div>
       </section>
+      <div className="panel-space"></div>
     </div>
   );
 };

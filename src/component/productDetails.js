@@ -1,101 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
-import imgPlus from "../assets/svg/plus-square.svg";
-import imgMinus from "../assets/svg/minus-square.svg";
+import React from "react";
 
 const ProductDetails = () => {
-  const [qty, setQty] = useState(1);
-
-  const handleQuantityChange = () => {};
-
-  const plusQty = () => {
-    setQty((prev) => {
-      return prev + 1;
-    });
-  };
-
-  const minusQty = () => {
-    if (qty > 1) {
-      setQty((prev) => {
-        return prev - 1;
-      });
-    }
-  };
-
   return (
-    <div className="product-detail-box px-15">
-      <div className="size-detail">
-        <h4 className="size-title">
-          Select Size: <Link to={""}> Size Chart</Link>
+    <div>
+      <div className="product-detail-box px-15">
+        <h4 className="page-title mb-1">Product Details</h4>
+        <h4 className="content-color mb-3">
+          Black, off-white and peach-coloured printed flared skirt, has zip
+          closure, attached lining
         </h4>
-        <ul className="size-select">
-          <li>
-            <Link to={""}> S</Link>
-          </li>
-          <li>
-            <Link to={""}> M</Link>
-          </li>
-          <li>
-            <Link to={""}> L</Link>
-          </li>
-          <li className="disable">
-            <del>XL</del>
-          </li>
-        </ul>
-      </div>
-      <div className="size-detail">
-        <h4 className="size-title">Select Color:</h4>
-        <ul className="filter-color">
-          <li className="active">
-            <Link to={""}>
-              <div className="color-box light-purple"></div>
-            </Link>
-          </li>
-          <li className="">
-            <Link to={""}>
-              <div className="color-box light-grey"></div>
-            </Link>
-          </li>
-          <li className="">
-            <Link to={""}>
-              <div className="color-box blue-purple"></div>
-            </Link>
-          </li>
-          <li className="">
-            <div className="color-box light-orange">
-              <Link to={""}></Link>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div className="size-detail">
-        <h4 className="size-title">Quantity:</h4>
-        <div className="qty-counter">
-          <div className="input-group">
-            <button
-              type="button"
-              className="btn quantity-left-minus"
-              onClick={minusQty}
-            >
-              <img src={imgMinus} className="img-fluid" alt="" />
-            </button>
-            <input
-              type="text"
-              name="quantity"
-              className="form-control form-theme qty-input input-number"
-              value={qty}
-              onChange={handleQuantityChange}
-            />
-            <button
-              type="button"
-              className="btn quantity-right-plus"
-              onClick={plusQty}
-            >
-              <img src={imgPlus} className="img-fluid" alt="" />
-            </button>
-          </div>
-        </div>
+        <h4 className="page-title mb-1">Model Size &amp; Fit</h4>
+        <h4 className="content-color mb-3">
+          The model (height 5'8") is wearing a size 28
+        </h4>
+        <h4 className="page-title mb-1">Material &amp; Care</h4>
+        <h4 className="content-color mb-3">100% polyester, Machine-wash</h4>
+        <h4 className="page-title mb-1">Product Code</h4>
+        <h4 className="content-color">460356366_floral</h4>
       </div>
     </div>
   );

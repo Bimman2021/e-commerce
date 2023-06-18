@@ -4,12 +4,17 @@ import shareImg from "../assets/svg/share-2.svg";
 import { RWebShare } from "react-web-share";
 import ProductDetails from "../component/productDetails";
 import Products from "../component/products";
+import ReturnPolicy from "../component/returnPolicy";
+import ProductSize from "../component/productSize";
+import CustomerReview from "../component/customerReview";
+import CheckDelivery from "../component/checkDelivery";
+import SimilarProducts from "../component/similarProducts";
 
 const Header = () => {
   return (
     <header className="">
       <div className="back-links">
-        <Link to="shop.html">
+        <Link to={-1}>
           <i className="iconly-Arrow-Left icli"></i>
           <div className="content">
             <h2>Floral Skirts </h2>
@@ -69,9 +74,19 @@ const Product = () => {
     <div>
       <Header />
       <div className="divider"></div>
+      <ProductSize />
+      <div className="divider"></div>
+      <ReturnPolicy />
+      <div className="divider"></div>
       <ProductDetails />
-
+      <div className="divider"></div>
+      <CustomerReview />
+      <div className="divider"></div>
+      <CheckDelivery />
+      <div className="divider"></div>
+      <SimilarProducts title={"Similar Products"} />
       <Footer />
+      <div className="panel-space"></div>
     </div>
   );
 };

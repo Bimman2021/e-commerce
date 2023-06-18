@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img from "../assets/images/flag.png";
+import img from "../../assets/images/flag.png";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { toggleMode } from "../contexts/slices/dayNight";
-import { getCookie, setCookie } from "../config/useCookie";
+import { toggleMode } from "../../contexts/slices/dayNight";
+import { getCookie, setCookie } from "../../config/useCookie";
 
 const UsefulLink = () => {
   const setTrue = String(getCookie("dayNight")).toLowerCase() === "true";
@@ -48,19 +48,19 @@ const UsefulLink = () => {
           </li>
           <li>
             <Link to="/order-history">
-              <i className="iconly-Document icli"></i>
+              <i className="iconly-Category icli"></i>
               <div className="content">
-                <h4>Orders</h4>
+                <h4>Dashboard</h4>
                 <h6>Ongoing Orders, Recent Orders..</h6>
               </div>
             </Link>
           </li>
           <li>
-            <Link to="/wishlist">
-              <i className="iconly-Heart icli"></i>
+            <Link to="/admin/upload">
+              <i className="iconly-Upload icli"></i>
               <div className="content">
-                <h4>Your Wishlist</h4>
-                <h6>Your Save Products</h6>
+                <h4>Upload Product</h4>
+                <h6>Adding new Products</h6>
               </div>
             </Link>
           </li>

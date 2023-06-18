@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
@@ -9,10 +9,16 @@ function RatingCanvas() {
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true);
-    console.log(rating.current);
+    setTimeout(() => {
+      let n = rating.current.childNodes;
+      n.forEach((element, index) => {
+        element.addEventListener("click", (e) => {
+          console.log(e.currentTarget);
+        });
+      });
+    }, 100);
   };
 
-  useEffect(() => {}, []);
   return (
     <>
       <button
@@ -33,7 +39,7 @@ function RatingCanvas() {
           <h2 className="mb-2">Write Review</h2>
           <div className="d-flex align-items-center">
             <h4 className="content-color me-2">Your rating:</h4>
-            <ul className="ratings" ref={rating}>
+            <ul className="ratings" id="rating" ref={rating}>
               <li>
                 <i className="iconly-Star icbo"></i>
               </li>
