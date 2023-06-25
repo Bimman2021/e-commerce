@@ -2746,7 +2746,7 @@ header.darkHeader.bg-transparent {
   overflow-x: hidden;
 }
 .home-section .slick-default .slick-list {
-  margin-left: -23px;
+  margin-left: -23px !important;
 }
 .home-section .slider-box {
   border-radius: 6px;
@@ -4570,3 +4570,11 @@ button {
   z-index: 1;
   cursor: pointer;
 }
+
+.theme-dots > div.slick-list {
+  padding: 0px 30px !important;
+}
+
+/* .slick-list {
+  margin-left: -23px !important;
+} */

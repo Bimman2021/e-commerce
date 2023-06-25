@@ -1,12 +1,12 @@
 import React from "react";
-import img from "../assets/images/home-slider/1.jpg";
+// import img from "../assets/images/home-slider/1.jpg";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Banner = () => {
-  const cData = [
+  const images = [
     {
       url: require("../assets/images/home-slider/1.jpg"),
     },
@@ -21,15 +21,18 @@ const Banner = () => {
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 500,
-    slidesToShow: 1,
+    speed: 300,
+    slidesToShow: 1.06,
     slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    className: "theme-dots",
   };
 
   return (
-    <div className="overflow-hidden mb-5">
-      <Slider className="ratio_55" {...sliderSettings}>
-        {cData.map((item, index) => {
+    <div className="overflow-hidden ratio_55">
+      <Slider {...sliderSettings}>
+        {images.map((item, index) => {
           return (
             <div key={index}>
               <div
@@ -39,8 +42,20 @@ const Banner = () => {
                   backgroundSize: "cover",
                   backgroundPosition: "center center",
                   display: "block",
+                  height: "100%",
                 }}
               >
+                <img
+                  src={item.url}
+                  className="img-fluid bg-img"
+                  alt=""
+                  style={{
+                    display: "none",
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "auto",
+                  }}
+                ></img>
                 <div className="slider-content">
                   <div>
                     <h2>Welcome To Multikart</h2>

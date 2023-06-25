@@ -3,19 +3,17 @@ import Spinner from "react-bootstrap/Spinner";
 import Header from "../component/header";
 import Banner from "../component/bannerCarousel";
 import DealOfDay from "../component/deal";
-import axios from "../config/axios";
+// import axios from "../config/axios";
 import Navbar from "../component/navBar";
 import SectionCategories from "../component/sectionCategories";
 import FindYourStyle from "../component/findYourStyle";
-import img from "../assets/images/products/1.jpg";
+// import img from "../assets/images/products/1.jpg";
 import logo1 from "../assets/images/logo/logo48.png";
-
+import BannerTimer from "../component/bannerTimer";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../contexts/slices/cartSlice";
-import { setCookie } from "../config/useCookie";
+import datas from "../config/products";
 
-function OffCanvasExample({ name, show, setShow }) {
+function OffCanvasExample({ show, setShow }) {
   // const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -60,23 +58,12 @@ function OffCanvasExample({ name, show, setShow }) {
 }
 
 const Home = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    setData([
-      {
-        id: 1,
-        image: img,
-        title: "Home Product For Goodbye use",
-        price: 100,
-      },
-    ]);
-    setTimeout(() => {
-      setShow(true);
-    }, 3000);
+    setData(datas);
   }, []);
-
   return (
     <>
       <Header />
@@ -84,17 +71,21 @@ const Home = () => {
       <SectionCategories />
       <div className="divider"></div>
       <Banner />
-      {data ? (
+      {data.length > 0 ? (
         <DealOfDay props={{ data }} />
       ) : (
-        <div className="d-flex justify-content-center align-center">
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: 150 }}
+        >
           <Spinner animation="grow" />
         </div>
       )}
 
       <div className="divider"></div>
       <FindYourStyle />
-      <div className="divider"></div>
+      <BannerTimer />
+      <div className="panel-space"></div>
       <Navbar />
     </>
   );

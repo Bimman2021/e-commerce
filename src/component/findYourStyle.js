@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import WishBtn from "./wishBtn";
+import products from "../config/products";
 
 const FindYourStlye = () => {
-  const pData = [
-    { url: require("../assets/images/products/1.jpg") },
-    { url: require("../assets/images/products/2.jpg") },
-    { url: require("../assets/images/products/3.jpg") },
-    { url: require("../assets/images/products/4.jpg") },
-  ];
+  const [currentFilter, setCurrentFilter] = useState("Trending Now");
+  const tags = ["Trending Now", "Featured Product", "top picks", "top rated"];
 
+  const pData = products.filter((p) => {
+    return p.tag.includes(currentFilter.toLowerCase());
+  });
+
+  const handleFilterClick = (e) => {
+    const dataId = e.currentTarget.getAttribute("data-id").toLowerCase();
+    setCurrentFilter(() => dataId);
+    console.log({
+      currentFilter: currentFilter,
+      currentClick: dataId,
+    });
+  };
+
+  //
   return (
     <section className="pt-0 tab-section">
       <div className="title-section px-15">
@@ -17,18 +29,24 @@ const FindYourStlye = () => {
       </div>
       <div className="tab-section">
         <ul className="nav nav-tabs theme-tab pl-15">
-          <li className="nav-item">
-            <button className="nav-link active">Trending Now</button>
-          </li>
-          <li className="nav-item">
-            <button className="nav-link">Top Picks</button>
-          </li>
-          <li className="nav-item">
-            <button className="nav-link">Featured Products</button>
-          </li>
+          {tags.map((item, index) => {
+            return (
+              <li className="nav-item" key={index}>
+                <button
+                  onClick={handleFilterClick}
+                  data-id={item}
+                  className={
+                    currentFilter === item ? "nav-link active" : "nav-link"
+                  }
+                >
+                  {item}
+                </button>
+              </li>
+            );
+          })}
         </ul>
         <div className="tab-content px-15">
-          <div className="tab-pane fade active show" id="trending">
+          <div className="tab-pane fade active show">
             <div className="row gy-3 gx-3">
               {pData.map((item, index) => {
                 return (
@@ -39,7 +57,7 @@ const FindYourStlye = () => {
                           to="product"
                           className="bg-size"
                           style={{
-                            backgroundImage: `url(${item.url})`,
+                            backgroundImage: `url(${item.images[0]})`,
                             backgroundSize: "cover",
                             backgroundPosition: "center center",
                             display: "block",
@@ -52,17 +70,7 @@ const FindYourStlye = () => {
                             // style="display: none;"
                           /> */}
                         </Link>
-                        <div className="wishlist-btn">
-                          <i className="iconly-Heart icli"></i>
-                          <i className="iconly-Heart icbo"></i>
-                          <div className="effect-group">
-                            <span className="effect"></span>
-                            <span className="effect"></span>
-                            <span className="effect"></span>
-                            <span className="effect"></span>
-                            <span className="effect"></span>
-                          </div>
-                        </div>
+                        <WishBtn />
                       </div>
                       <div className="product-content">
                         <ul className="ratings">

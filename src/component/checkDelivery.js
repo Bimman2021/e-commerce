@@ -1,6 +1,7 @@
 import React from "react";
 import deliveryImg from "../assets/svg/delivery.svg";
 import refundImg from "../assets/svg/refund.svg";
+import payImg from "../assets/svg/payment.svg";
 
 const CheckDelivery = () => {
   return (
@@ -23,7 +24,7 @@ const CheckDelivery = () => {
               Free Delivery on order above $200.00
             </li>
             <li>
-              <img src="assets/svg/payment.svg" className="img-fluid" alt="" />
+              <img src={payImg} className="img-fluid" alt="" />
               Cash On delivery Available
             </li>
             <li>

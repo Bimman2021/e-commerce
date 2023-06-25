@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import shareImg from "../assets/svg/share-2.svg";
 import { RWebShare } from "react-web-share";
 import ProductDetails from "../component/productDetails";
-import Products from "../component/products";
+// import Products from "../component/products";
 import ReturnPolicy from "../component/returnPolicy";
 import ProductSize from "../component/productSize";
 import CustomerReview from "../component/customerReview";
 import CheckDelivery from "../component/checkDelivery";
 import SimilarProducts from "../component/similarProducts";
+import Slider from "react-slick";
 
 const Header = () => {
   return (
@@ -70,9 +71,83 @@ const Footer = () => {
 };
 
 const Product = () => {
+  //
+  const images = [
+    {
+      url: require("../assets/images/1.jpg"),
+    },
+    {
+      url: require("../assets/images/home-slider/2.jpg"),
+    },
+    {
+      url: require("../assets/images/home-slider/2.jpg"),
+    },
+  ];
+
+  //
+  const slickProps = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    className: "theme-dots",
+  };
+
   return (
     <div>
       <Header />
+
+      <Slider {...slickProps}>
+        {images.map((item, index) => {
+          return (
+            <div key={index} className="cl">
+              <img src={item.url} className="img-fluid bg-img" alt="" />
+            </div>
+          );
+        })}
+      </Slider>
+
+      {/*  */}
+      <div className="product-detail-box px-15 pt-2">
+        <div className="main-detail">
+          <h2 className="text-capitalize">floral print skirt with white top</h2>
+          <h6 className="content-color">
+            Black, off-white and peach-coloured printed flared skirt, has zip
+            closure, attached lining
+          </h6>
+          <div className="rating-section">
+            <ul className="ratings">
+              <li>
+                <i className="iconly-Star icbo"></i>
+              </li>
+              <li>
+                <i className="iconly-Star icbo"></i>
+              </li>
+              <li>
+                <i className="iconly-Star icbo"></i>
+              </li>
+              <li>
+                <i className="iconly-Star icbo"></i>
+              </li>
+              <li>
+                <i className="iconly-Star icbo empty"></i>
+              </li>
+            </ul>
+            <h6 className="content-color">(20 ratings)</h6>
+          </div>
+          <div className="price">
+            <h4>
+              $32.00 <del>$35.00</del>
+              <span>(20% off)</span>
+            </h4>
+          </div>
+          <h6 className="text-green">inclusive of all taxes</h6>
+        </div>
+      </div>
+      {/*  */}
+
       <div className="divider"></div>
       <ProductSize />
       <div className="divider"></div>
