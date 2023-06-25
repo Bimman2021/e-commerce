@@ -20,7 +20,7 @@ import Delivery from "./pages/delivery";
 import Payment from "./pages/payment";
 import OrderPlaced from "./pages/orderPlaced";
 import OrderTrack from "./pages/orderTrack";
-import AddAddress from "./pages/addAddress";
+// import AddAddress from "./pages/addAddress";
 import SavedAddress from "./pages/savedAddress";
 import Terms from "./pages/termsNcondition";
 import HelpPage from "./pages/helpPage";
@@ -50,7 +50,7 @@ function App() {
       <Route path="/order-placed" element={<OrderPlaced />} />
       <Route path="/order-history" element={<OrderPlaced />} />
       <Route path="/track-order" element={<OrderTrack />} />
-      <Route path="/new-address" element={<AddAddress />} />
+      {/* <Route path="/new-address" element={<AddAddress />} /> */}
       <Route path="/saved-address" element={<SavedAddress />} />
       <Route path="/terms-condition" element={<Terms />} />
       <Route path="/forgot-password" element={<Reset />} />
