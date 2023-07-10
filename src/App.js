@@ -27,14 +27,16 @@ import HelpPage from "./pages/helpPage";
 import AdminHome from "./pages/admin/home";
 import Upload from "./pages/admin/upload";
 import Categories from "./pages/categories";
+import Notepad from "./pages/notepad";
 
 function App() {
-  const dayNight = useSelector((state) => state.dayNight);
+  // const dayNight = useSelector((state) => state.dayNight);
 
   return (
     <Routes>
       {/* public routes */}
       <Route path="/" element={<Home />} />
+      <Route path="/notepad" element={<Notepad />} />
       <Route path="/notifications" element={<Notifications />} />
       <Route path="/category" element={<Categories />} />
       <Route path="/search" element={<Search />} />

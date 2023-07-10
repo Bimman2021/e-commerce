@@ -2,7 +2,7 @@ const data = [
   {
     id: 1,
     title: "tag to wear",
-    price: 200,
+    price: 148,
     discount: 20,
     del: 287,
     seller: "by mango",
@@ -20,7 +20,7 @@ const data = [
   },
   {
     id: 2,
-    title: "tag to wear",
+    title: "Real italian gold",
     price: 200,
     discount: 20,
     del: 287,
@@ -40,7 +40,7 @@ const data = [
   {
     id: 3,
     title: "Blue Denim Jacket",
-    price: 200,
+    price: 420,
     discount: 20,
     del: 287,
     seller: "by mango",
@@ -59,7 +59,7 @@ const data = [
   {
     id: 4,
     title: "tag to wear",
-    price: 200,
+    price: 185,
     discount: 20,
     del: 287,
     seller: "by mango",
@@ -115,8 +115,8 @@ const data = [
   },
   {
     id: 7,
-    title: "tag to wear",
-    price: 200,
+    title: "Gucci jean jacket",
+    price: 830,
     discount: 20,
     del: 287,
     seller: "by mango",

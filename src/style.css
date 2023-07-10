@@ -1026,9 +1026,6 @@ button:focus {
 /*=====================
    2.10 Slider CSS start
 ==========================*/
-.slick-default .slick-slide > div {
-  margin: 0 8px;
-}
 
 .slick-default .slick-list {
   margin: 0 -8px;
@@ -4476,10 +4473,6 @@ button {
 /* .py-8 {
 } */
 
-.slick-slide > div {
-  margin: 0 8px !important;
-}
-
 .home-section .slick-list {
   margin-left: -23px;
   padding: 0px 30px;
@@ -4572,9 +4565,25 @@ button {
 }
 
 .theme-dots > div.slick-list {
-  padding: 0px 30px !important;
+  padding: 0px 1.5rem !important;
+}
+
+.slick-slide > div {
+  margin: 0 0.4rem !important;
+}
+
+.slick-default .slick-slide > div {
+  margin: 0 0.5rem !important;
 }
 
 /* .slick-list {
   margin-left: -23px !important;
 } */
+
+.my_quill {
+  height: 90vh !important;
+}
+
+.fs24 {
+  font-size: 24px !important;
+}

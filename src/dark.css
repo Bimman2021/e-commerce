@@ -4485,3 +4485,15 @@ header.darkHeader.bg-transparent {
   z-index: 1;
   cursor: pointer;
 }
+
+.theme-dots > div.slick-list {
+  padding: 0px 1.5rem !important;
+}
+
+.slick-slide > div {
+  margin: 0 0.4rem !important;
+}
+
+.slick-default .slick-slide > div {
+  margin: 0 0.5rem !important;
+}

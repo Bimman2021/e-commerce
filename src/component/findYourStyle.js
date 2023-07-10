@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import WishBtn from "./wishBtn";
 import products from "../config/products";
+import StarRating from "./starRating";
 
 const FindYourStlye = () => {
   const [currentFilter, setCurrentFilter] = useState("Trending Now");
@@ -70,36 +71,16 @@ const FindYourStlye = () => {
                             // style="display: none;"
                           /> */}
                         </Link>
-                        <WishBtn />
+                        <WishBtn productId={item.id} />
                       </div>
-                      <div className="product-content">
-                        <ul className="ratings">
-                          <li>
-                            <i className="iconly-Star icbo"></i>
-                          </li>
-                          <li>
-                            <i className="iconly-Star icbo"></i>
-                          </li>
-                          <li>
-                            <i className="iconly-Star icbo"></i>
-                          </li>
-                          <li>
-                            <i className="iconly-Star icbo"></i>
-                          </li>
-                          <li>
-                            <i className="iconly-Star icbo empty"></i>
-                          </li>
-                        </ul>
-                        <Link to="product.html">
-                          <h4>Blue Denim Jacket</h4>
-                        </Link>
-                        <div className="price">
-                          <h4>
-                            $32.00 <del>$35.00</del>
-                            <span>20%</span>
-                          </h4>
-                        </div>
-                      </div>
+                      <StarRating
+                        star={2}
+                        name="Gucci jean shirt"
+                        price={50}
+                        currency={"$"}
+                        // del={75}
+                        discount={12}
+                      />
                     </div>
                   </div>
                 );
