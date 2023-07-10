@@ -5,7 +5,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
-var url = "http://localhost:3021/api/notepad";
+// var url = "http://localhost:3021/api/notepad";
+var url = "https://shop-cheap-backend.onrender.com/api/notepad";
 
 function MyVerticallyCenteredModal(props) {
   const handleClose = () => {
@@ -89,7 +90,7 @@ const List = (props) => {
     props.setModalShow(true);
   };
   const handleDelete = (e) => {
-    const dIndex = e.currentTarget.getAttribute("data-key");
+    // const dIndex = e.currentTarget.getAttribute("data-key");
     const id = e.currentTarget.getAttribute("data-id");
     axios.delete(url + "/" + id);
     // props.setCurrentKey(dIndex);
