@@ -159,8 +159,10 @@ const Notepad = () => {
         })
         .then((res) => {
           console.log(res);
+          alert("saved");
         })
         .catch((err) => {
+          alert("error");
           console.log(err);
         });
     } else {
@@ -198,8 +200,7 @@ const Notepad = () => {
             onChange={handleChange}
           />
         </>
-      ) : (
-        dataArray &&
+      ) : dataArray ? (
         dataArray.map((item, index) => {
           return (
             <List
@@ -214,6 +215,10 @@ const Notepad = () => {
             />
           );
         })
+      ) : (
+        <div className="center text-center">
+          <h4>Loading ...</h4>
+        </div>
       )}
       <MyVerticallyCenteredModal
         show={modalShow}
