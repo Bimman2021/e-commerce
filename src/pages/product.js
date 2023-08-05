@@ -14,6 +14,7 @@ import BackHeader from "../component/backHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../contexts/slices/cartSlice";
 import axios from "../config/axios";
+import { url } from "../config/constants";
 
 const Footer = ({ product, qty }) => {
   const cartItems = useSelector((state) => state.cartItems);
@@ -104,7 +105,7 @@ const Product = () => {
             return (
               <div key={index} className="cl">
                 <img
-                  src={`http://localhost:5000/${item}`}
+                  src={`${url}${item}`}
                   className="img-fluid bg-img"
                   alt=""
                 />
