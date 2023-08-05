@@ -1,7 +1,8 @@
 import axios from "axios";
 
 var BASE;
-BASE = "https://fakestoreapi.com/products";
+// BASE = "https://fakestoreapi.com/products";
+BASE = "http://localhost:5000/api/";
 
 const instance = axios.create({
   baseURL: BASE,

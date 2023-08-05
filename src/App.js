@@ -15,12 +15,11 @@ import Profile from "./pages/profile";
 import ProfileSetting from "./pages/profileSettings";
 import Shop from "./pages/shop";
 import Product from "./pages/product";
-import { useSelector } from "react-redux";
 import Delivery from "./pages/delivery";
 import Payment from "./pages/payment";
 import OrderPlaced from "./pages/orderPlaced";
 import OrderTrack from "./pages/orderTrack";
-// import AddAddress from "./pages/addAddress";
+import AddAddress from "./pages/addAddress";
 import SavedAddress from "./pages/savedAddress";
 import Terms from "./pages/termsNcondition";
 import HelpPage from "./pages/helpPage";
@@ -47,12 +46,12 @@ function App() {
       <Route path="/shop" element={<Shop />} />
       <Route path="/help" element={<HelpPage />} />
       <Route path="/payment" element={<Payment />} />
-      <Route path="/product" element={<Product />} />
+      <Route path="/product/:product_id" element={<Product />} />
       <Route path="/profile-settings" element={<ProfileSetting />} />
       <Route path="/order-placed" element={<OrderPlaced />} />
       <Route path="/order-history" element={<OrderPlaced />} />
       <Route path="/track-order" element={<OrderTrack />} />
-      {/* <Route path="/new-address" element={<AddAddress />} /> */}
+      <Route path="/new-address" element={<AddAddress />} />
       <Route path="/saved-address" element={<SavedAddress />} />
       <Route path="/terms-condition" element={<Terms />} />
       <Route path="/forgot-password" element={<Reset />} />

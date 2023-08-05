@@ -4568,6 +4568,10 @@ button {
   padding: 0px 1.5rem !important;
 }
 
+.nopad .theme-dots > div.slick-list {
+  padding: 0px 0rem !important;
+}
+
 .slick-slide > div {
   margin: 0 0.4rem !important;
 }

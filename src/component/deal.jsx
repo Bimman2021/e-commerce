@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import WishBtn from "./wishBtn";
+import { url } from "../config/constants";
 
 const DealOfDay = ({ props }) => {
   return (
@@ -16,10 +17,10 @@ const DealOfDay = ({ props }) => {
             return (
               <div className="col-12" key={index}>
                 <div className="product-inline">
-                  <Link to="product">
+                  <Link to={`/product/${item.id}`}>
                     <img
                       // src={img1}
-                      src={item.images[0]}
+                      src={`${url}${item.images[0]}`}
                       className="img-fluid"
                       alt=""
                     />

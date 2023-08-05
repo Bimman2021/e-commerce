@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import truck from "../assets/images/truck.gif";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Orderdetails = ({ showTruck }) => {
+  const [dataToRender, setDataToRender] = useState({
+    total: 0,
+    bagTotal: 0,
+    saving: 0,
+    delivery: 0,
+  });
+  const cartItems = useSelector((state) => state.cartItems);
+
+  useEffect(() => {
+    setDataToRender((prev) => {
+      return { ...prev, ["bagTotal"]: bagTotal(cartItems) };
+    });
+  }, [cartItems.length]);
   return (
     <section id="order-details" className="px-15 pt-0">
       <h2 className="title">Order Details:</h2>
@@ -9,12 +24,13 @@ const Orderdetails = ({ showTruck }) => {
         <ul>
           <li>
             <h4>
-              Bag total <span>$220.00</span>
+              Bag total <span>${dataToRender.bagTotal}</span>
             </h4>
           </li>
           <li>
             <h4>
-              Bag savings <span className="text-green">-$20.00</span>
+              Bag savings{" "}
+              <span className="text-green">-$ {dataToRender.saving}</span>
             </h4>
           </li>
           <li>
@@ -27,13 +43,13 @@ const Orderdetails = ({ showTruck }) => {
           </li>
           <li>
             <h4>
-              Delivery <span>$50.00</span>
+              Delivery <span>${dataToRender.delivery}</span>
             </h4>
           </li>
         </ul>
         <div className="total-amount">
           <h4>
-            Total Amount <span>$270.00</span>
+            Total Amount <span>${dataToRender.total}</span>
           </h4>
         </div>
         {showTruck && (
@@ -75,5 +91,14 @@ export function OrderDetailsWithTracking() {
     </section>
   );
 }
+
+const bagTotal = (items) => {
+  // if (typeof items === "object") return 0;
+  let total = 0;
+  items.forEach((item) => {
+    total += item.price * item.qty;
+  });
+  return total;
+};
 
 export default Orderdetails;

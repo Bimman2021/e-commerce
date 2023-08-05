@@ -55,7 +55,7 @@ const FindYourStlye = () => {
                     <div className="product-box ratio_square">
                       <div className="img-part">
                         <Link
-                          to="product"
+                          to={`product/${item.id}`}
                           className="bg-size"
                           style={{
                             backgroundImage: `url(${item.images[0]})`,

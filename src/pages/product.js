@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { Link, useParams } from "react-router-dom";
 import shareImg from "../assets/svg/share-2.svg";
 import { RWebShare } from "react-web-share";
 import ProductDetails from "../component/productDetails";
@@ -10,20 +10,81 @@ import CustomerReview from "../component/customerReview";
 import CheckDelivery from "../component/checkDelivery";
 import SimilarProducts from "../component/similarProducts";
 import Slider from "react-slick";
+import BackHeader from "../component/backHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../contexts/slices/cartSlice";
+import axios from "../config/axios";
 
-const Header = () => {
+const Footer = ({ product, qty }) => {
+  const cartItems = useSelector((state) => state.cartItems);
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    let isInCart = cartItems.find((item) => item.id === product.id);
+    if (isInCart) {
+      alert("item already in cart");
+    } else {
+      dispatch(addToCart({ ...product, qty: qty }));
+      alert("item added");
+    }
+  };
   return (
-    <header className="">
-      <div className="back-links">
-        <Link to={-1}>
-          <i className="iconly-Arrow-Left icli"></i>
-          <div className="content">
-            <h2>Floral Skirts </h2>
-          </div>
-        </Link>
+    <div className="fixed-panel">
+      <div className="row">
+        <div className="col-6">
+          <Link to="/wishlist">
+            <i className="iconly-Heart icli"></i>WISHLIST
+          </Link>
+        </div>
+        <div className="col-6">
+          <button className="theme-color" onClick={handleAddToCart}>
+            <i className="iconly-Buy icli"></i>ADD TO BAG
+          </button>
+        </div>
       </div>
-      <div className="header-option">
-        <ul>
+    </div>
+  );
+};
+
+const Product = () => {
+  const pid = useParams().product_id;
+  const [data, setData] = useState();
+  const [qty, setQty] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchData = async () => {
+    try {
+      const resData = await axios.post("/get_products", { id: pid });
+      const res = resData.data;
+      setData(res);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  //
+  const slickProps = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    // slidesToScroll: 0.5,
+    arrows: false,
+    className: "theme-dots top-space",
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return isLoading ? (
+    <h1>Loading ...</h1>
+  ) : (
+    <div>
+      <BackHeader
+        options={true}
+        optComponent={
           <li>
             <RWebShare
               data={{
@@ -35,79 +96,23 @@ const Header = () => {
               <img src={shareImg} className="img-fluid" alt="" />
             </RWebShare>
           </li>
-          <li>
-            <Link to="/wishlist">
-              <i className="iconly-Heart icli"></i>
-            </Link>
-          </li>
-          <li>
-            <Link to="/cart">
-              <i className="iconly-Buy icli"></i>
-            </Link>
-          </li>
-        </ul>
+        }
+      />
+      <div className="nopad">
+        <Slider {...slickProps}>
+          {data.images.map((item, index) => {
+            return (
+              <div key={index} className="cl">
+                <img
+                  src={`http://localhost:5000/${item}`}
+                  className="img-fluid bg-img"
+                  alt=""
+                />
+              </div>
+            );
+          })}
+        </Slider>
       </div>
-    </header>
-  );
-};
-
-const Footer = () => {
-  return (
-    <div className="fixed-panel">
-      <div className="row">
-        <div className="col-6">
-          <Link to="/wishlist">
-            <i className="iconly-Heart icli"></i>WISHLIST
-          </Link>
-        </div>
-        <div className="col-6">
-          <button className="theme-color">
-            <i className="iconly-Buy icli"></i>ADD TO BAG
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Product = () => {
-  //
-  const images = [
-    {
-      url: require("../assets/images/1.jpg"),
-    },
-    {
-      url: require("../assets/images/home-slider/2.jpg"),
-    },
-    {
-      url: require("../assets/images/home-slider/2.jpg"),
-    },
-  ];
-
-  //
-  const slickProps = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    className: "theme-dots",
-  };
-
-  return (
-    <div>
-      <Header />
-
-      <Slider {...slickProps}>
-        {images.map((item, index) => {
-          return (
-            <div key={index} className="cl">
-              <img src={item.url} className="img-fluid bg-img" alt="" />
-            </div>
-          );
-        })}
-      </Slider>
 
       {/*  */}
       <div className="product-detail-box px-15 pt-2">
@@ -149,7 +154,7 @@ const Product = () => {
       {/*  */}
 
       <div className="divider"></div>
-      <ProductSize />
+      <ProductSize qty={qty} setQty={setQty} />
       <div className="divider"></div>
       <ReturnPolicy />
       <div className="divider"></div>
@@ -160,7 +165,7 @@ const Product = () => {
       <CheckDelivery />
       <div className="divider"></div>
       <SimilarProducts title={"Similar Products"} />
-      <Footer />
+      <Footer product={data} qty={qty} />
       <div className="panel-space"></div>
     </div>
   );

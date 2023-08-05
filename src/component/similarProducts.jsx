@@ -54,6 +54,7 @@ const SimilarProducts = ({ title }) => {
   const sliderSettings = {
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoPlay: true,
     infinite: false,
     responsive: [
       {

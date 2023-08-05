@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import imgPlus from "../assets/svg/plus-square.svg";
 import imgMinus from "../assets/svg/minus-square.svg";
 
-const ProductSize = () => {
-  const [qty, setQty] = useState(1);
-
-  const handleQuantityChange = () => {};
-
+const ProductSize = ({ qty, setQty }) => {
   const plusQty = () => {
     setQty((prev) => {
       return prev + 1;
@@ -85,7 +80,7 @@ const ProductSize = () => {
               name="quantity"
               className="form-control form-theme qty-input input-number"
               value={qty}
-              onChange={handleQuantityChange}
+              readOnly={true}
             />
             <button
               type="button"
