@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import tesseract from "../config/tesseract";
+import { Spinner } from "react-bootstrap";
 
 const ImgToText = () => {
   const [imagePreview, setImagePreview] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    setIsLoading(true);
     const reader = new FileReader();
 
     reader.onloadend = () => {
@@ -17,7 +20,8 @@ const ImgToText = () => {
         })
         .catch(() => {
           alert("Error occurred reading image");
-        });
+        })
+        .finally(() => setIsLoading(false));
     };
 
     if (file) {
@@ -36,26 +40,37 @@ const ImgToText = () => {
           type="file"
           onChange={handleImageChange}
           className="form-control"
+          accept="image/*"
         />
       </div>
-      <div className="my-3" style={{ border: "1px solid #ccc" }}>
-        {text ? (
-          <div>
-            <div className="d-flex justify-content-center">
-              <img
-                src={imagePreview}
-                alt=""
-                style={{
-                  objectFit: "cover",
-                  height: 150,
-                  width: 150,
-                }}
-              />
-            </div>
-            <p>{text}</p>
-          </div>
+      <div
+        className="my-3"
+        style={{ border: "1px solid #ccc", minHeight: 300 }}
+      >
+        {isLoading ? (
+          <Spinner color="#FF4C3B" />
         ) : (
-          <div style={{ fontStyle: "italic" }}>Image Texts Shows Here</div>
+          <div>
+            {" "}
+            {text ? (
+              <div>
+                <div className="d-flex justify-content-center">
+                  <img
+                    src={imagePreview}
+                    alt=""
+                    style={{
+                      objectFit: "cover",
+                      height: 150,
+                      width: 150,
+                    }}
+                  />
+                </div>
+                <p className="p-3">{text}</p>
+              </div>
+            ) : (
+              <div style={{ fontStyle: "italic" }}>Image Texts Shows Here</div>
+            )}
+          </div>
         )}
       </div>
       <p style={{ fontStyle: "italic" }}>code with love @bim-tec 💖</p>
