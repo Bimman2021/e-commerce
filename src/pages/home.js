@@ -12,7 +12,7 @@ import logo1 from "../assets/images/logo/logo48.png";
 import BannerTimer from "../component/bannerTimer";
 import Offcanvas from "react-bootstrap/Offcanvas";
 // import datas from "../config/products";
-import tesseract from "../config/tesseract";
+
 import axios from "../config/axios";
 
 function OffCanvasExample({ show, setShow }) {
@@ -63,21 +63,6 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [imagePreview, setImagePreview] = useState(null);
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setImagePreview(() => reader.result);
-      tesseract(reader.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
 
   const getData = async () => {
     try {
@@ -111,10 +96,7 @@ const Home = () => {
 
       <div className="divider"></div>
       <FindYourStyle />
-
       <BannerTimer />
-      <img src={imagePreview} alt="" width={"100%"} />
-      <input type="file" onChange={handleImageChange} className="form-group" />
       <div className="panel-space"></div>
       <Navbar />
     </>

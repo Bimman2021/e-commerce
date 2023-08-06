@@ -12,7 +12,7 @@ const DealOfDay = ({ props }) => {
       </div>
       <div className="product-section">
         <div className="row gy-3">
-          {/* accepts array of object with pImage,pName,pWishlist,price,delPrice,pDiscount,pOwner */}
+          {/*  */}
           {props.data.splice(0, 4).map((item, index) => {
             return (
               <div className="col-12" key={index}>

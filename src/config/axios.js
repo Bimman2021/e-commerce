@@ -1,8 +1,8 @@
 import axios from "axios";
 
 var BASE;
-BASE = "https://shop-cheap-backend.onrender.com/api/";
-// BASE = "http://localhost:5000/api/";
+// BASE = "https://shop-cheap-backend.onrender.com/api/";
+BASE = "http://localhost:5000/api/";
 
 const instance = axios.create({
   baseURL: BASE,

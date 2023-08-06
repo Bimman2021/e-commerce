@@ -27,6 +27,7 @@ import AdminHome from "./pages/admin/home";
 import Upload from "./pages/admin/upload";
 import Categories from "./pages/categories";
 import Notepad from "./pages/notepad";
+import ImgToText from "./pages/imgToText";
 
 function App() {
   // const dayNight = useSelector((state) => state.dayNight);
@@ -35,7 +36,6 @@ function App() {
     <Routes>
       {/* public routes */}
       <Route path="/" element={<Home />} />
-      <Route path="/notepad" element={<Notepad />} />
       <Route path="/notifications" element={<Notifications />} />
       <Route path="/category" element={<Categories />} />
       <Route path="/search" element={<Search />} />
@@ -57,7 +57,10 @@ function App() {
       <Route path="/forgot-password" element={<Reset />} />
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
-
+      {/*  */}
+      <Route path="/image-to-text" element={<ImgToText />} />
+      <Route path="/notepad" element={<Notepad />} />
+      {/*  */}
       <Route path="/admin" element={<Signin rF={true} />} />
       <Route path="/admin/home" element={<AdminHome />} />
       <Route path="/admin/upload" element={<Upload />} />
