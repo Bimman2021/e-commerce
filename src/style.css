@@ -1337,14 +1337,14 @@ button:focus {
   margin-top: 4px;
   display: block;
 }
-.bottom-panel ul li a .active span {
+.bottom-panel ul li a.active span {
   color: #ff4c3b;
 }
-.bottom-panel ul li a .active i.icbo {
+.bottom-panel ul li a.active i.icbo {
   display: block;
   color: #ff4c3b;
 }
-.bottom-panel ul li a .active i.icli {
+.bottom-panel ul li a.active i.icli {
   display: none;
 }
 
@@ -4590,4 +4590,9 @@ button {
 
 .fs24 {
   font-size: 24px !important;
+}
+
+/* form admin */
+.is-invalid .css-13cymwt-control {
+  border-color: #dc3545 !important;
 }

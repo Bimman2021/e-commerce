@@ -92,6 +92,7 @@ export function OrderDetailsWithTracking() {
   );
 }
 
+//to calculate total amount in bag
 const bagTotal = (items) => {
   // if (typeof items === "object") return 0;
   let total = 0;
@@ -99,6 +100,12 @@ const bagTotal = (items) => {
     total += item.price * item.qty;
   });
   return total;
+};
+
+//to calculate discount and amount saved
+const bagSaving = (items) => {
+  //formula
+  //originalPrice = sellingPrice / (1 - percentage);
 };
 
 export default Orderdetails;

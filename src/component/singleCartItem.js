@@ -1,51 +1,36 @@
 import React, { useState } from "react";
 import img from "../assets/images/products/1.jpg";
 import { Link } from "react-router-dom";
-import Offcanvas from "react-bootstrap/Offcanvas";
 import { url } from "../config/constants";
 import { removeFromCart } from "../contexts/slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import FooterCanvas from "./footerCanvas";
 
-function FooterCanvas({ show, setShow, addToWishList, remove }) {
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+const Component = ({ remove, addToWishList }) => {
   return (
     <>
-      <div className="nav-bar" onClick={handleShow}></div>
-
-      <Offcanvas
-        className="removecart-canvas h-auto"
-        show={show}
-        placement="bottom"
-        onHide={handleClose}
-      >
-        <Offcanvas.Body className="small">
-          <div className="content">
-            <h4>Remove Item:</h4>
-            <p>
-              Are you sure you want to remove or move this item from the cart?
-            </p>
+      <div className="content">
+        <h4>Remove Item:</h4>
+        <p>Are you sure you want to remove or move this item from the cart?</p>
+      </div>
+      <div className="bottom-cart-panel">
+        <div className="row">
+          <div className="col-7">
+            <a onClick={addToWishList} className="title-color">
+              MOVE TO WISHLIST
+            </a>
           </div>
-          <div className="bottom-cart-panel">
-            <div className="row">
-              <div className="col-7">
-                <a onClick={addToWishList} className="title-color">
-                  MOVE TO WISHLIST
-                </a>
-              </div>
-              <div className="col-5">
-                <a onClick={remove} className="theme-color">
-                  REMOVE
-                </a>
-              </div>
-            </div>
+          <div className="col-5">
+            <a onClick={remove} className="theme-color">
+              REMOVE
+            </a>
           </div>
-        </Offcanvas.Body>
-      </Offcanvas>
+        </div>
+      </div>
     </>
   );
-}
+};
 
 const SingleCartItem = ({ data, index }) => {
   const [show, setShow] = useState(false);
@@ -54,11 +39,17 @@ const SingleCartItem = ({ data, index }) => {
   const remove = () => {
     const res = cartItems.filter((item) => item.id !== data.id);
     dispatch(removeFromCart(res));
+    toast.info("item removed");
   };
 
   return (
     <div className="cart-box px-15">
-      <FooterCanvas show={show} setShow={setShow} remove={remove} />
+      {/* <ToastContainer theme="light" autoClose={3000} /> */}
+      <FooterCanvas
+        show={show}
+        setShow={setShow}
+        component={<Component remove={remove} />}
+      />
       <Link to="product" className="cart-img">
         <img src={`${url}${data.images[0]}`} className="img-fluid" alt="" />
       </Link>

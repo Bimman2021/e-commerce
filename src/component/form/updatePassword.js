@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
@@ -7,29 +8,42 @@ import Spinner from "react-bootstrap/Spinner";
 import { FormHeader } from "./signin";
 import BackHeader from "../backHeader";
 
-export default function Reset() {
+const UpdatePassword = () => {
   return (
     <>
       <FormHeader />
       <section className="form-section px-15 top-space section-b-space">
-        <h1>Forgot Password</h1>
+        <h1>Reset Password</h1>
         <form>
           <div className="form-floating mb-4">
             <input
-              type="email"
+              type="password"
               className="form-control"
               id="one"
-              placeholder="Address"
+              placeholder="Current Password"
             />
-            <label htmlFor="one">Email Address</label>
+            <label htmlFor="one">Current Password *</label>
           </div>
-          <Link
-            to="#"
-            className="btn btn-solid w-100"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasBottom"
-          >
-            Send otp
+          <div className="form-floating mb-4">
+            <input
+              type="password"
+              className="form-control"
+              id="two"
+              placeholder="New Password"
+            />
+            <label htmlFor="two">New Password *</label>
+          </div>
+          <div className="form-floating mb-4">
+            <input
+              type="password"
+              className="form-control"
+              id="three"
+              placeholder="Confirm Password"
+            />
+            <label htmlFor="three">Confirm Password *</label>
+          </div>
+          <Link to="#" className="btn btn-solid w-100">
+            RESET PASSWORD
           </Link>
         </form>
         <div className="bottom-detail text-center mt-3">
@@ -46,4 +60,6 @@ export default function Reset() {
       </section>
     </>
   );
-}
+};
+
+export default UpdatePassword;

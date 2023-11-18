@@ -15,6 +15,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../contexts/slices/cartSlice";
 import axios from "../config/axios";
 import { url } from "../config/constants";
+import { ToastContainer, toast } from "react-toastify";
+import dp from "../data/dataset.json";
+import OfferForYou from "../component/offerForYou";
 
 const Footer = ({ product, qty }) => {
   const cartItems = useSelector((state) => state.cartItems);
@@ -22,27 +25,30 @@ const Footer = ({ product, qty }) => {
   const handleAddToCart = () => {
     let isInCart = cartItems.find((item) => item.id === product.id);
     if (isInCart) {
-      alert("item already in cart");
+      toast.info("item already in cart");
     } else {
       dispatch(addToCart({ ...product, qty: qty }));
-      alert("item added");
+      toast.success("item added");
     }
   };
   return (
-    <div className="fixed-panel">
-      <div className="row">
-        <div className="col-6">
-          <Link to="/wishlist">
-            <i className="iconly-Heart icli"></i>WISHLIST
-          </Link>
-        </div>
-        <div className="col-6">
-          <button className="theme-color" onClick={handleAddToCart}>
-            <i className="iconly-Buy icli"></i>ADD TO BAG
-          </button>
+    <>
+      {/* <ToastContainer theme="dark" /> */}
+      <div className="fixed-panel">
+        <div className="row">
+          <div className="col-6">
+            <Link to="/wishlist">
+              <i className="iconly-Heart icli"></i>WISHLIST
+            </Link>
+          </div>
+          <div className="col-6">
+            <button className="theme-color" onClick={handleAddToCart}>
+              <i className="iconly-Buy icli"></i>ADD TO BAG
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -52,17 +58,17 @@ const Product = () => {
   const [qty, setQty] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = async () => {
-    try {
-      const resData = await axios.post("/get_products", { id: pid });
-      const res = resData.data;
-      setData(res);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const resData = await axios.post("/get_products", { id: pid });
+  //     const res = resData.data;
+  //     setData(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   //
   const slickProps = {
@@ -76,7 +82,9 @@ const Product = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    console.log(dp[0]);
+    setData(dp[0]);
+    setIsLoading(false);
   }, []);
 
   return isLoading ? (
@@ -89,9 +97,9 @@ const Product = () => {
           <li>
             <RWebShare
               data={{
-                text: "Like humans, flamingos make friends for life",
-                url: "https://olo.com/2zHaNup",
-                title: "Flamingos",
+                text: data.tile,
+                url: window.location.href,
+                title: data.title,
               }}
             >
               <img src={shareImg} className="img-fluid" alt="" />
@@ -101,7 +109,7 @@ const Product = () => {
       />
       <div className="nopad">
         <Slider {...slickProps}>
-          {data.images.map((item, index) => {
+          {data.image_url.map((item, index) => {
             return (
               <div key={index} className="cl">
                 <img
@@ -156,6 +164,8 @@ const Product = () => {
 
       <div className="divider"></div>
       <ProductSize qty={qty} setQty={setQty} />
+      <div className="divider"></div>
+      <OfferForYou />
       <div className="divider"></div>
       <ReturnPolicy />
       <div className="divider"></div>

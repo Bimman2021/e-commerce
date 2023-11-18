@@ -1,6 +1,7 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Signin from "./component/form/signin";
 import Signup from "./component/form/signup";
+import VerifyEmail from "./component/form/verifyEmail";
 import Reset from "./component/form/reset-password";
 import NoPage from "./component/Nopage";
 // import { AuthMail } from "./contexts/authMail";
@@ -28,47 +29,71 @@ import Upload from "./pages/admin/upload";
 import Categories from "./pages/categories";
 import Notepad from "./pages/notepad";
 import ImgToText from "./pages/imgToText";
+import OfflinePage from "./pages/offlinePage";
+import { ToastContainer } from "react-toastify";
+import UpdatePassword from "./component/form/updatePassword";
+import { useSelector } from "react-redux";
 
 function App() {
-  // const dayNight = useSelector((state) => state.dayNight);
+  const darkMode = useSelector((state) => state.darkMode);
+  const carrier = useSelector((state) => state.carrier);
 
+  //
   return (
-    <Routes>
-      {/* public routes */}
-      <Route path="/" element={<Home />} />
-      <Route path="/notifications" element={<Notifications />} />
-      <Route path="/category" element={<Categories />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/wishlist" element={<WishList />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/delivery" element={<Delivery />} />
-      <Route path="/shop" element={<Shop />} />
-      <Route path="/help" element={<HelpPage />} />
-      <Route path="/payment" element={<Payment />} />
-      <Route path="/product/:product_id" element={<Product />} />
-      <Route path="/profile-settings" element={<ProfileSetting />} />
-      <Route path="/order-placed" element={<OrderPlaced />} />
-      <Route path="/order-history" element={<OrderPlaced />} />
-      <Route path="/track-order" element={<OrderTrack />} />
-      <Route path="/new-address" element={<PlusAddress />} />
-      <Route path="/saved-address" element={<SavedAddress />} />
-      <Route path="/terms-condition" element={<Terms />} />
-      <Route path="/forgot-password" element={<Reset />} />
-      <Route path="/signin" element={<Signin />} />
-      <Route path="/signup" element={<Signup />} />
-      {/*  */}
-      <Route path="/image-to-text" element={<ImgToText />} />
-      <Route path="/notepad" element={<Notepad />} />
-      {/*  */}
-      <Route path="/admin" element={<Signin rF={true} />} />
-      <Route path="/admin/home" element={<AdminHome />} />
-      <Route path="/admin/upload" element={<Upload />} />
+    <div>
+      <ToastContainer
+        theme={darkMode ? "dark" : "light"}
+        style={{ fontFamily: "Lato, sans-serif" }}
+      />
+      <Routes>
+        {/* public routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/category" element={<Categories />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/wishlist" element={<WishList />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/delivery" element={<Delivery />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/help" element={<HelpPage />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/product/:product_id" element={<Product />} />
+        <Route path="/profile-settings" element={<ProfileSetting />} />
+        <Route path="/order-placed" element={<OrderPlaced />} />
+        <Route path="/order-history" element={<OrderPlaced />} />
+        <Route path="/track-order" element={<OrderTrack />} />
+        <Route path="/new-address" element={<PlusAddress />} />
+        <Route path="/saved-address" element={<SavedAddress />} />
+        <Route path="/terms-condition" element={<Terms />} />
+        <Route path="/forgot-password" element={<Reset />} />
+        <Route path="/update-password" element={<UpdatePassword />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/verify-email"
+          element={
+            carrier?.title == "VERIFY EMAIL" ? (
+              <VerifyEmail />
+            ) : (
+              <Navigate to={"/signin"} />
+            )
+          }
+        />
+        {/*  */}
+        <Route path="/image-to-text" element={<ImgToText />} />
+        <Route path="/notepad" element={<Notepad />} />
+        <Route path="/offline" element={<OfflinePage />} />
+        {/*  */}
+        <Route path="/admin" element={<Signin rF={true} />} />
+        <Route path="/admin/home" element={<AdminHome />} />
+        <Route path="/admin/upload" element={<Upload />} />
 
-      {/* general route */}
-      <Route path="/404" element={<NoPage />} />
-      <Route path="*" element={<NoPage />} />
-    </Routes>
+        {/* general route */}
+        <Route path="/404" element={<NoPage />} />
+        <Route path="*" element={<NoPage />} />
+      </Routes>
+    </div>
   );
 }
 

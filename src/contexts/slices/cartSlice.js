@@ -1,14 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { getCookie } from "../../config/useCookie";
 
 const cartSlice = createSlice({
   name: "cartItems",
-  initialState: [],
+  initialState: localStorage.getItem("cis")
+    ? JSON.parse(localStorage.getItem("cis"))
+    : [],
   reducers: {
     addToCart: (state, action) => {
-      return [...state, action.payload];
+      const ins = [...state, action.payload];
+      localStorage.setItem("cis", JSON.stringify(ins));
+      return ins;
     },
     removeFromCart: (_, action) => {
+      localStorage.setItem("cis", JSON.stringify(action.payload));
       return action.payload;
     },
     addQty: (state, action) => {

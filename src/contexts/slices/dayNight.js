@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCookie } from "../../config/useCookie";
 
-const setTrue = String(getCookie("dayNight")).toLowerCase() === "true";
+const setTrue = String(getCookie("darkMode")).toLowerCase() === "true";
 const initialState = setTrue ?? false;
 
 const dayNightSlice = createSlice({
-  name: "dayNight",
+  name: "darkMode",
   initialState,
   reducers: {
     toggleMode: (state, action) => {

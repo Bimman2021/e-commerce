@@ -1,153 +1,173 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "../../config/axios";
 import Spinner from "react-bootstrap/Spinner";
-import { useMail } from "../../contexts/authMail";
 import { useNavigate } from "react-router-dom";
-import MobileInput from "./phoneNumber";
-
 import { Helmet } from "react-helmet";
 import { FormFooter, FormHeader } from "./signin";
-
-// function validator(data) {
-//   if (data.length < 1) return false;
-
-//   const resObj = {};
-//   console.log(data.name);
-//   console.log(data);
-
-//   if (data.name.length < 1) {
-//     resObj.name = "this field is required";
-//   } else if (!/^[a-z,.'-]+$/i.test(data.name)) {
-//     resObj.name = "enter your real full name";
-//   }
-
-//   //case email
-//   if (data.email.length < 1) {
-//     resObj.email = "this field is required";
-//   }
-
-//   //case mobile
-//   if (data.mobile.length < 1) {
-//     resObj.mobile = "this field is required";
-//   }
-
-//   //case password
-//   if (data.password.length < 1) {
-//     resObj.password = "this field is required";
-//   }
-
-//   return resObj;
-// }
+import validateInput from "../../config/validateInput";
+import { setCarrier } from "../../contexts/slices/carrierSlice";
+import { useDispatch } from "react-redux";
 
 export default function Signup() {
-  // const navigate = useNavigate();
-  // const { setEmail } = useMail();
-  // const [eye, setEye] = useState(false);
-  // const [inputValue, setInputValue] = useState({
-  //   name: "",
-  //   mobile: "",
-  //   email: "",
-  //   password: "",
-  //   ref_code: "",
-  // });
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState("");
-  // const [iError, setIerror] = useState({});
+  const [i, setI] = useState(false);
+  const [bLoading, setBLoading] = useState(false);
+  const [iValue, setIValue] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [err, setErr] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // // handle change
-  // const handleChange = (e) => {
-  //   setError("");
-  //   setIerror({});
-  //   const { name, value } = e.target;
-  //   setInputValue({ ...inputValue, [name]: value });
-  // };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setIValue((prev) => {
+      return { ...prev, [name]: value };
+    });
+    setErr((prev) => {
+      return { ...prev, [name]: "" };
+    });
+  };
 
-  // //send
-  // const send = () => {
-  //   axios
-  //     .post("/register", { ...inputValue }, { contentType: "application/json" })
-  //     .then((res) => {
-  //       if (res) {
-  //         setIsLoading(false);
-  //         const data = res.data;
-  //         console.log(res);
-  //         setEmail({ email: data.email, code: data.code });
-  //         navigate("/verify-email", { replace: true });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       setIsLoading(false);
-  //       setError("");
-  //       switch (err.code) {
-  //         case "ERR_NETWORK":
-  //           setError("Network Error");
-  //           break;
-  //         case "ERR_BAD_REQUEST":
-  //           const statusCode = err?.response?.status;
-  //           const resObj = err?.response?.data.errors;
-  //           if (statusCode === 422) {
-  //             console.log(resObj);
-  //             setIerror(resObj);
-  //           }
-  //           break;
-  //         default:
-  //           console.log(err);
-  //           setError("Unknown error! try again");
-  //       }
-  //     });
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErr(validateInput(iValue));
+    if (Object.keys(err).length === 0) {
+      try {
+        setBLoading(true);
+        const sRes = await axios.post("/register", { ...iValue });
+        const resData = sRes.data;
+        if (resData.status === "success") {
+          dispatch(
+            setCarrier({
+              title: "VERIFY EMAIL",
+              msg: {
+                code: resData.code,
+                email: resData.email,
+              },
+            })
+          );
+          navigate("/verify-email");
+        }
+      } catch (error) {
+        console.error(error);
+        if (error.code === "ERR_BAD_REQUEST") {
+          const eArray = error.response.data.errors;
+          eArray.forEach((er) => {
+            const { path, msg } = er;
+            setErr({
+              [path]: msg,
+            });
+          });
+        } else if (error.code === "ERR_NETWORK") {
+          setErr({
+            generic: "network error!. Server cannot be reached",
+          });
+        } else if (error.code === "ERR_BAD_RESPONSE") {
+          setErr({
+            generic: "Server error!. Something went wrong",
+          });
+        } else {
+          setErr({
+            generic: "Unknown error!.",
+          });
+        }
+      } finally {
+        setBLoading(false);
+      }
+    }
+  };
 
-  // //handle submit
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
-  //   send();
-  // };
-
-  // for eye icon show
-
-  // iconly-Hide icli hide iconly-Show
+  //
   return (
     <>
       <FormHeader />
       <section className="form-section px-15 top-space section-b-space">
         <form>
+          {err?.generic?.length > 0 && (
+            <div className="text-danger text-center mb-4">{err?.generic}</div>
+          )}
           <div className="form-floating mb-4">
             <input
               type="text"
-              className="form-control"
-              id="one"
+              className={
+                err?.name?.length > 0
+                  ? "form-control is-invalid"
+                  : "form-control"
+              }
+              id="name"
+              name="name"
+              onChange={handleChange}
+              value={iValue.name}
               placeholder="Name"
             />
-            <label htmlFor="one">Name</label>
+            <label htmlFor="name">Name</label>
+            {err?.name?.length > 0 && (
+              <div className="invalid-feedback"> {err.name}</div>
+            )}
           </div>
           <div className="form-floating mb-4">
             <input
               type="email"
-              className="form-control"
-              id="two"
-              placeholder="Email/phone"
+              className={
+                err?.email?.length > 0
+                  ? "form-control is-invalid"
+                  : "form-control"
+              }
+              id="email"
+              name="email"
+              onChange={handleChange}
+              placeholder="Email"
             />
-            <label htmlFor="two">Email/phone</label>
+            <label htmlFor="email">Email</label>
+            {err?.email?.length > 0 && (
+              <div className="invalid-feedback"> {err.email}</div>
+            )}
           </div>
           <div className="form-floating mb-4">
             <input
-              type="password"
-              id="txtPassword"
-              className="form-control"
+              type={i ? "text" : "password"}
+              id="password"
+              name="password"
+              onChange={handleChange}
+              className={
+                err?.password?.length > 0
+                  ? "form-control is-invalid"
+                  : "form-control"
+              }
               placeholder="password"
             />
-            <label>Password</label>
-            <div id="btnToggle" className="password-hs">
-              <i id="eyeIcon" className="iconly-Hide icli hide"></i>
-            </div>
+            <label htmlFor="password">Password</label>
+            {iValue.password.length > 1 && (
+              <div
+                onClick={() => setI((prev) => !prev)}
+                className="password-hs"
+              >
+                {i ? (
+                  <i className="iconly-Hide icli hide"></i>
+                ) : (
+                  <i className="iconly-Show icli "></i>
+                )}
+              </div>
+            )}
+            {err?.password?.length > 0 && (
+              <div className="invalid-feedback"> {err.password}</div>
+            )}
           </div>
-          <Link to="#" className="btn btn-solid w-100">
-            Sign UP
-          </Link>
+          <button
+            disabled={bLoading ? true : false}
+            onClick={handleSubmit}
+            className="btn btn-solid w-100"
+          >
+            {bLoading ? <Spinner size="sm" /> : "Sign UP"}
+          </button>
         </form>
-        <FormFooter />
+        <FormFooter isNew={true} />
       </section>
     </>
   );

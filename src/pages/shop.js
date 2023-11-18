@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Filter from "../component/filter";
 import Navbar from "../component/navBar";
+import WishBtn from "../component/wishBtn";
 
 const Header = () => {
   return (
@@ -73,7 +74,7 @@ const Shop = () => {
                 <div className="product-box ratio_square">
                   <div className="img-part">
                     <Link
-                      to="product.html"
+                      to="product"
                       className="bg-size"
                       style={{
                         backgroundImage: `url(${item.url})`,
@@ -89,7 +90,7 @@ const Shop = () => {
                         // style="display: none;"
                       />
                     </Link>
-                    <div className="wishlist-btn">
+                    {/* <div className="wishlist-btn">
                       <i className="iconly-Heart icli"></i>
                       <i className="iconly-Heart icbo"></i>
                       <div className="effect-group">
@@ -99,7 +100,8 @@ const Shop = () => {
                         <span className="effect"></span>
                         <span className="effect"></span>
                       </div>
-                    </div>
+                    </div> */}
+                    <WishBtn />
                     <label>new</label>
                   </div>
                   <div className="product-content">
@@ -130,6 +132,14 @@ const Shop = () => {
                       </h4>
                     </div>
                   </div>
+                  <button
+                    className="btn btn-solid w-100 mt-3"
+                    style={{
+                      fontSize: ".8rem",
+                    }}
+                  >
+                    add to cart
+                  </button>
                 </div>
               </div>
             );

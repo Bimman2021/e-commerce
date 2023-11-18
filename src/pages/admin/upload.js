@@ -10,9 +10,24 @@ import { Helmet } from "react-helmet";
 import { FormFooter, FormHeader } from "../../component/form/signin";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Form1 from "./component/form1";
+import Form2 from "./component/form2";
+import validateForm from "./validForm";
 
+const initf1 = {
+  name: "",
+  brand: "",
+  price: "",
+  discount: "",
+  unit: "",
+  category: "",
+  sub_cat: "",
+};
 export default function Upload() {
-  const [src, setSrc] = useState();
+  const [f1, setf1] = useState(initf1);
+  const [f1Err, setf1Err] = useState(initf1);
+  const [fIndex, setFindex] = useState(0);
+
   const [imgPrev, setImgPrev] = useState([]);
   const [imgArr, setImgArr] = useState([]);
   const [fileInput, setFileInput] = useState(false);
@@ -73,99 +88,75 @@ export default function Upload() {
     const newImgArr = imgArr.filter((data, index) => index !== imgIndex);
     setImgArr(newImgArr);
   };
+  const handleNext = (e) => {
+    e.preventDefault();
+    const hasErr = validateForm(f1);
+    setf1Err(hasErr);
+    console.log(hasErr);
+    if (Object.keys(hasErr).length < 1) {
+      console.log("validated");
+      if (fIndex !== 3) {
+        setFindex((prev) => {
+          return (prev += 1);
+        });
+      }
+    }
+  };
+  const handlePrev = (e) => {
+    e.preventDefault();
+    if (fIndex !== 0) {
+      setFindex((prev) => {
+        return (prev -= 1);
+      });
+    }
+  };
 
-  // for eye icon show
-
-  // iconly-Hide icli hide iconly-Show
   return (
     <>
       <FormHeader />
       <section className="form-section px-15 top-space section-b-space">
         <form>
-          <div className="form-floating mb-4">
-            <input
-              type="text"
-              className="form-control"
-              id="one"
-              placeholder="Name"
-            />
-            <label htmlFor="one">Product Name</label>
-          </div>
-          <div className="form-floating mb-4">
-            <input
-              type="email"
-              className="form-control"
-              id="two"
-              placeholder="Email/phone"
-            />
-            <label htmlFor="two">Product Category</label>
-          </div>
-          <div className="form-floating mb-4">
-            <input
-              type="password"
-              id="txtPassword"
-              className="form-control"
-              placeholder="password"
-            />
-            <label>Password</label>
-            <div id="btnToggle" className="password-hs">
-              <i id="eyeIcon" className="iconly-Hide icli hide"></i>
-            </div>
-          </div>
-          <div className=" mb-4">
-            <label className="upload-label" htmlFor="upload">
-              <div className="text-center">
-                <i
-                  className="iconly-Paper-Upload"
-                  style={{ fontSize: "2rem" }}
-                ></i>
-                <div>Upload Product Image (Maximum of 4 image)</div>
-              </div>
-              <input
-                type="file"
-                className="d-none"
-                id="upload"
-                onChange={handleUpload}
-                accept="image/*"
-                multiple
-              />
-            </label>
-          </div>
-          <Link to="#" className="btn btn-solid w-100">
-            Upload
-          </Link>
-        </form>
-        <div className="d-flex flex-wrap">
-          {imgArr.map((item, index) => {
-            return (
-              <div className="col-4 p-1 preview-img-cont" key={index}>
-                <img
-                  // src={URL.createObjectURL(item)}
-                  src={item}
-                  alt=""
-                  className="border-1 w-100"
+          {
+            {
+              0: (
+                <Form1
+                  err={f1Err}
+                  setErr={setf1Err}
+                  iValue={f1}
+                  setIValue={setf1}
+                  handleUpload={handleUpload}
+                  handleRemove={handleRemove}
+                  imgArr={imgArr}
                 />
-                <div
-                  className="upload__img-close"
-                  onClick={handleRemove}
-                  data-index={index}
-                ></div>
-              </div>
-            );
-          })}
-        </div>
+              ),
+              1: (
+                <Form2
+                  err={f1Err}
+                  setErr={setf1Err}
+                  iValue={f1}
+                  setIValue={setf1}
+                  handleUpload={handleUpload}
+                  handleRemove={handleRemove}
+                  imgArr={imgArr}
+                />
+              ),
+            }[fIndex]
+          }
+
+          {/* footer */}
+          <div className="bottom-form-btn d-flex flex-nowrap justify-content-between">
+            <button onClick={handlePrev} className="btn btn-solid col-4">
+              Prev
+            </button>
+            <button
+              onClick={handleNext}
+              className="btn btn-solid col-4 ml-auto"
+            >
+              Next
+            </button>
+          </div>
+        </form>
       </section>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </>
   );
 }

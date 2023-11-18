@@ -1,0 +1,19 @@
+[
+  {
+    "id": "1",
+    "price": 19,
+    "del_price": null,
+    "product_name": "Italian leather whrist watch",
+    "description": "this watch is designed to manage subscriptions mobile devices description designed",
+    "review_id": 1,
+    "cat_id": 2,
+    "sub_cat_id": 3,
+    "date_created": "2015-10-2",
+    "variants": ["blue", "green", "yellow"],
+    "image_url": [
+      "http://loldb.com/images/",
+      "http://loldb.com/images/",
+      "http://loldb.com/images/"
+    ]
+  }
+]

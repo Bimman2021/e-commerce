@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../assets/images/flag.png";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -7,16 +7,24 @@ import { toggleMode } from "../contexts/slices/dayNight";
 import { getCookie, setCookie } from "../config/useCookie";
 
 const UsefulLink = () => {
-  const setTrue = String(getCookie("dayNight")).toLowerCase() === "true";
-  // const dayNight = useSelector((state) => state.dayNight);
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const setTrue = String(getCookie("darkMode")).toLowerCase() === "true";
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleDark = async (e) => {
     const isDark = e.target.checked;
     dispatch(toggleMode(isDark));
 
-    setCookie("dayNight", isDark, 3);
+    setCookie("darkMode", isDark, 3);
     window.location.reload();
+  };
+
+  const handleAccess = (e) => {
+    if (!isLogin) {
+      e.preventDefault();
+      navigate("/signin");
+    }
   };
 
   return (
@@ -47,7 +55,7 @@ const UsefulLink = () => {
             </div>
           </li>
           <li>
-            <Link to="/order-history">
+            <Link to="/order-history" onClick={handleAccess}>
               <i className="iconly-Document icli"></i>
               <div className="content">
                 <h4>Orders</h4>
@@ -65,7 +73,7 @@ const UsefulLink = () => {
             </Link>
           </li>
           <li>
-            <Link to="saved-cards.html">
+            <Link to="saved-cards.html" onClick={handleAccess}>
               <i className="iconly-Wallet icli"></i>
               <div className="content">
                 <h4>Payment</h4>
@@ -74,7 +82,7 @@ const UsefulLink = () => {
             </Link>
           </li>
           <li>
-            <Link to="/saved-address">
+            <Link to="/saved-address" onClick={handleAccess}>
               <i className="iconly-Location icli"></i>
               <div className="content">
                 <h4>Saved Address</h4>
@@ -92,7 +100,7 @@ const UsefulLink = () => {
             </Link>
           </li>
           <li>
-            <Link to="/notifications">
+            <Link to="/notifications" onClick={handleAccess}>
               <i className="iconly-Notification icli"></i>
               <div className="content">
                 <h4>Notification</h4>
@@ -110,7 +118,7 @@ const UsefulLink = () => {
             </Link>
           </li>
           <li>
-            <Link to="/profile-settings">
+            <Link to="/profile-settings" onClick={handleAccess}>
               <i className="iconly-Password icli"></i>
               <div className="content">
                 <h4>Profile setting</h4>

@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
-import { useAuth } from "../../contexts/userAuth";
+import { useState } from "react";
 import axios from "../../config/axios";
+import validateInput from "../../config/validateInput";
+import { setCarrier } from "../../contexts/slices/carrierSlice";
+import { useDispatch } from "react-redux";
 import Spinner from "react-bootstrap/Spinner";
 import logo from "../../assets/images/logo.png";
 import design from "../../assets/images/design.svg";
@@ -9,7 +11,7 @@ import fb from "../../assets/images/social/fb.png";
 import google from "../../assets/images/social/google.png";
 import apple from "../../assets/images/social/apple.png";
 import { Helmet } from "react-helmet";
-import { useMail } from "../../contexts/authMail";
+import { toast } from "react-toastify";
 
 export function FormHeader() {
   return (
@@ -19,7 +21,7 @@ export function FormHeader() {
         <Link to="/">
           <img src={logo} className="img-fluid" alt="" />
         </Link>
-        <Link className="skip-cls" to={-1}>
+        <Link className="skip-cls" to={"/"}>
           SKIP
         </Link>
       </div>
@@ -27,7 +29,17 @@ export function FormHeader() {
   );
 }
 
-export function FormFooter() {
+export function FormFooter({ isNew }) {
+  const handleMethods = (e) => {
+    e.preventDefault();
+    toast.warn(
+      "SIGNIN METHOD NOT AVAILABLE!. please use another signin method",
+      {
+        hideProgressBar: true,
+        position: "top-center",
+      }
+    );
+  };
   return (
     <>
       <div className="or-divider">
@@ -36,17 +48,17 @@ export function FormFooter() {
       <div className="social-auth">
         <ul>
           <li>
-            <Link to="#">
+            <Link to="#" onClick={handleMethods}>
               <img src={google} className="img-fluid" alt=" " />
             </Link>
           </li>
           <li>
-            <Link to="#">
+            <Link to="#" onClick={handleMethods}>
               <img src={fb} className="img-fluid" alt="" />
             </Link>
           </li>
           <li>
-            <Link to="#">
+            <Link to="#" onClick={handleMethods}>
               <img src={apple} className="img-fluid" alt="" />
             </Link>
           </li>
@@ -54,12 +66,12 @@ export function FormFooter() {
       </div>
       <div className="bottom-detail text-center mt-3">
         <h4 className="content-color">
-          If you are new,{" "}
+          {!isNew ? "If you are new, " : "Already a customer ? "}
           <Link
             className="title-color text-decoration-underline"
-            to="register.html"
+            to={!isNew ? "/signup" : "/signin"}
           >
-            Create Now
+            {!isNew ? "Register Now" : "Login"}
           </Link>
         </h4>
       </div>
@@ -68,88 +80,83 @@ export function FormFooter() {
 }
 
 export default function Signin({ rF }) {
-  // const navigate = useNavigate();
-  // // const { setUser, setRememberMe } = useAuth();
-  // const { setEmail } = useMail();
-  // // console.log(useMail());
-  // //all state needed for login
-  // const init = { email: "", password: "", rememberMe: false };
-  // const [inputValue, setInputValue] = useState(init);
-  // const [error, setError] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [eye, setEye] = useState(false);
+  const [i, setI] = useState(false);
+  const [bLoading, setBLoading] = useState(false);
+  const [iValue, setIValue] = useState({
+    email: "",
+    password: "",
+  });
+  const [err, setErr] = useState({
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const handleChange = (e) => {
-  //   let { name, value } = e.target;
-  //   if (name === "rememberMe") {
-  //     value = e.target.checked;
-  //   }
-  //   setInputValue({ ...inputValue, [name]: value });
-  // };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setIValue((prev) => {
+      return { ...prev, [name]: value };
+    });
+    setErr((prev) => {
+      return { ...prev, [name]: "" };
+    });
+  };
 
-  // //handle submit
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
-  //   axios
-  //     .post("/login", { ...inputValue }, { contentType: "application/json" })
-  //     .then((res) => {
-  //       setIsLoading(false);
-  //       // console.log(res);
-  //       const data = res.data;
-  //       if (data.status === "success") {
-  //         // setUser((prev) => {
-  //           return {
-  //             ...prev,
-  //             isLogin: true,
-  //             token: data.authorisation.token,
-  //             user: data.user,
-  //           };
-  //         });
-  //         navigate("/home", { replace: true });
-  //       }
-
-  //       if (data.status === "verify") {
-  //         setEmail({ email: data.email, code: data.code });
-  //         navigate("/verify-email", { replace: true });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       setIsLoading(false);
-  //       console.error(err);
-  //       switch (err.code) {
-  //         case "ERR_NETWORK":
-  //           setError("Network Error");
-  //           break;
-  //         case "ERR_BAD_REQUEST":
-  //           // console.log(err.response.data.error);
-  //           setError("invalid username or password");
-  //           break;
-  //         default:
-  //           setError("Unknown error! try again");
-  //       }
-  //     });
-  // };
-
-  // //
-  // const toggleRememberMe = useCallback(() => {
-  //   setRememberMe(() => inputValue.rememberMe);
-  // }, [inputValue.rememberMe, setRememberMe]);
-
-  // //
-  // useEffect(() => {
-  //   toggleRememberMe();
-  //   window.localStorage.setItem(
-  //     "little-money-rememberMe",
-  //     inputValue.rememberMe
-  //   );
-  // }, [inputValue.rememberMe, toggleRememberMe]);
-
-  // //
-  // useEffect(() => {
-  //   setError("");
-  // }, [inputValue.email, inputValue.password]);
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErr(validateInput(iValue));
+    if (Object.keys(err).length === 0) {
+      try {
+        setBLoading(true);
+        const sRes = await axios.post("/login", { ...iValue });
+        const resData = sRes.data;
+        if (resData.status === "success") {
+          dispatch(
+            setCarrier({
+              title: "VERIFY EMAIL",
+              msg: {
+                code: resData.code,
+                email: resData.email,
+              },
+            })
+          );
+          navigate("/verify-email");
+        }
+      } catch (error) {
+        console.error(error);
+        if (error.code === "ERR_BAD_REQUEST") {
+          if (error.response.status === 422) {
+            const eArray = error.response.data.errors;
+            eArray.forEach((er) => {
+              const { path, msg } = er;
+              setErr({
+                [path]: msg,
+              });
+            });
+          } else {
+            setErr({
+              generic: error?.response?.data?.msg,
+            });
+          }
+        } else if (error.code === "ERR_NETWORK") {
+          setErr({
+            generic: "network error!. Server cannot be reached",
+          });
+        } else if (error.code === "ERR_BAD_RESPONSE") {
+          setErr({
+            generic: "Server error!. Something went wrong",
+          });
+        } else {
+          setErr({
+            generic: "Unknown error!.",
+          });
+        }
+      } finally {
+        setBLoading(false);
+      }
+    }
+  };
   return (
     <>
       <FormHeader />
@@ -160,34 +167,71 @@ export default function Signin({ rF }) {
           Login Now
         </h1>
         <form>
+          {err?.generic?.length > 0 && (
+            <div className="text-danger text-center mb-4">{err?.generic}</div>
+          )}
           <div className="form-floating mb-4">
             <input
-              type="text"
-              className="form-control"
-              id="one"
-              placeholder="Username or Email"
+              type="email"
+              className={
+                err?.email?.length > 0
+                  ? "form-control is-invalid"
+                  : "form-control"
+              }
+              id="email"
+              name="email"
+              onChange={handleChange}
+              placeholder="Email"
             />
-            <label htmlFor="one">Username or Email</label>
+            <label htmlFor="email">Email</label>
+            {err?.email?.length > 0 && (
+              <div className="invalid-feedback"> {err.email}</div>
+            )}
           </div>
           <div className="form-floating mb-2">
             <input
-              type="password"
-              className="form-control"
-              id="two"
+              type={i ? "text" : "password"}
+              id="password"
+              name="password"
+              onChange={handleChange}
+              className={
+                err?.password?.length > 0
+                  ? "form-control is-invalid"
+                  : "form-control"
+              }
               placeholder="password"
             />
-            <label htmlFor="two">Password</label>
+            <label htmlFor="password">Password</label>
+            {iValue.password.length > 1 && (
+              <div
+                onClick={() => setI((prev) => !prev)}
+                className="password-hs"
+              >
+                {i ? (
+                  <i className="iconly-Hide icli hide"></i>
+                ) : (
+                  <i className="iconly-Show icli "></i>
+                )}
+              </div>
+            )}
+            {err?.password?.length > 0 && (
+              <div className="invalid-feedback"> {err.password}</div>
+            )}
           </div>
           <div className="text-end mb-4">
-            <Link to="forgot-password.html" className="theme-color">
+            <Link to="/forgot-password" className="theme-color">
               Forgot Password ?
             </Link>
           </div>
-          <Link to="#" className="btn btn-solid w-100">
-            Sign in
-          </Link>
+          <button
+            disabled={bLoading ? true : false}
+            onClick={handleSubmit}
+            className="btn btn-solid w-100"
+          >
+            {bLoading ? <Spinner size="sm" /> : "Sign UP"}
+          </button>
         </form>
-        {rF ? "" : <FormFooter />}
+        {rF ? "" : <FormFooter isNew={false} />}
       </section>
     </>
   );

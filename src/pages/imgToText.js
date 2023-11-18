@@ -1,8 +1,36 @@
 import React, { useState } from "react";
 import tesseract from "../config/tesseract";
 import { Spinner } from "react-bootstrap";
+import Demo from "../component/cropper";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Modal heading
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{props.component}</Modal.Body>
+      <Modal.Footer>
+        <button className="btn btn-secondary" onClick={props.onHide}>
+          Close
+        </button>
+        <Button onClick={props.onHide}>crop</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 
 const ImgToText = () => {
+  const [modalShow, setModalShow] = React.useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState(null);
@@ -14,14 +42,15 @@ const ImgToText = () => {
 
     reader.onloadend = () => {
       setImagePreview(() => reader.result);
-      tesseract(reader.result)
-        .then((res) => {
-          setText(res);
-        })
-        .catch(() => {
-          alert("Error occurred reading image");
-        })
-        .finally(() => setIsLoading(false));
+      setModalShow(true);
+      // tesseract(reader.result)
+      //   .then((res) => {
+      //     setText(res);
+      //   })
+      //   .catch(() => {
+      //     alert("Error occurred reading image");
+      //   })
+      //   .finally(() => setIsLoading(false));
     };
 
     if (file) {
@@ -34,6 +63,12 @@ const ImgToText = () => {
       <div className="flex justify-content-center align-center text-center my-3">
         {/*  */}
         <h1>upload an image to get the text</h1>
+
+        <MyVerticallyCenteredModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          component={<Demo image={imagePreview} />}
+        />
       </div>
       <div className="form-group">
         <input
@@ -74,6 +109,7 @@ const ImgToText = () => {
         )}
       </div>
       <p style={{ fontStyle: "italic" }}>code with love @bim-tec 💖</p>
+      <Demo />
     </div>
   );
 };

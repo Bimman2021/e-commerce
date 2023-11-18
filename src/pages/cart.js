@@ -16,13 +16,13 @@ const Cart = () => {
 
   return cartItems.length < 1 ? (
     <>
-      <BackHeader title="Shopping Cart" />
+      <BackHeader title="Shopping Cart" options={true} />
       <EmptyCart />
       <SimilarProducts title="You May Also Like" />
     </>
   ) : (
     <div className="top-space">
-      <BackHeader title="Shopping Cart" subTitle="step 1 of 3" />
+      <BackHeader title="Shopping Cart" options={true} subTitle="step 1 of 3" />
       <div className="top-space xl-space">
         {cartItems.map((item, index) => {
           return (
